@@ -1,4 +1,4 @@
-package src.main.java.baze;
+package baze;
 
 public class Main {
     public static void main(String[] args) {
