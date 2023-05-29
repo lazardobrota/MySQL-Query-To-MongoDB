@@ -6,4 +6,9 @@ public class Where extends Clause{
         super(name);
     }
 
+    @Override
+    public void fillOut(String[] lines, int l, int r) {
+
+    }
+
 }

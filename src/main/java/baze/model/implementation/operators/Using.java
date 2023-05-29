@@ -1,8 +1,6 @@
 package baze.model.implementation.operators;
 
-import baze.model.implementation.Clause;
-
-public class Using extends Operator {
+public class Using extends Oprt {
 
     public Using(String colmn, String variable) {
         super(colmn, variable);

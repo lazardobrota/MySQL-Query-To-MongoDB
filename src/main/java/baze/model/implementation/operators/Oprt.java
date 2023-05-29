@@ -1,11 +1,11 @@
 package baze.model.implementation.operators;
 
-public abstract class Operator {
-    String colmn; // levo, ono sto uzima iz baze podataka
+public abstract class Oprt {
+    String column; // levo, ono sto uzima iz baze podataka
     String variable; // desno, uslov sta uzima iz baze
 
-    public Operator(String colmn, String variable) {
-        this.colmn = colmn;
+    public Oprt(String column, String variable) {
+        this.column = column;
         this.variable = variable;
     }
 

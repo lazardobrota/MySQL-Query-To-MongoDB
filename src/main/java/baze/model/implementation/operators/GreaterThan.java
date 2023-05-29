@@ -1,6 +1,6 @@
 package baze.model.implementation.operators;
 
-public class GreaterThan extends Operator{
+public class GreaterThan extends Oprt {
     boolean equal; // da li je ovo >= ili >
 
     public GreaterThan(String colmn, String variable, boolean equal) {
