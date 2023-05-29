@@ -5,7 +5,10 @@ import baze.model.implementation.operators.Oprt;
 
 public class GreaterThanFactory extends OprtFactory{
     @Override
-    public Oprt createOprt(String operator) {
-        return new GreaterThan(operator);
+    public Oprt createOprt(String operation) {
+        if (operation.matches(">"))
+            return new GreaterThan(false);
+        else
+            return new GreaterThan(true); // >=
     }
 }

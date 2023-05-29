@@ -3,9 +3,9 @@ package baze.model.factory;
 import baze.model.implementation.operators.Oprt;
 
 public abstract class OprtFactory {
-    public Oprt getOprt(String operator) {
-        return createOprt(operator);
+    public Oprt getOprt(String operation) {
+        return createOprt(operation);
     }
 
-    public abstract Oprt createOprt(String operator);
+    public abstract Oprt createOprt(String operation);
 }
