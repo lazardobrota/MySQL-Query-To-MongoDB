@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class SQLQuery {
     //TODO Ideja: prolazi kroz listu reci i provera da li postoji u hashmapi, ako postoji upise je u hashmapu i stavi to iz hashmap u neku listu
-    //TODO zatim tu listu dalje prosledjuje gde treba
+    // zatim tu listu dalje prosledjuje gde treba
 
     List<Clause> claues = new ArrayList<>();
     Map<String, Clause> hashMap = new HashMap<>(); // cuva sve sto moze da se pravi
