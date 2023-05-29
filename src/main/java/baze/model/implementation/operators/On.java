@@ -1,17 +1,21 @@
 package baze.model.implementation.operators;
 
+import baze.model.factory.FactoryUtils;
+
 public class On extends Oprt {
+
+    private Oprt condition;
     public On() {
     }
 
     @Override
     public void fillOutOprt(String[] line, int c) {
-        if(line[c].contains("(")&&line[c].contains(")")){//u slucaju da nema razmaka izmedju zagrade
+        // TODO: 29/05/2023 konsultovati se sa dobrim sta nam dodje pametnije da radimo posto ovde moze doci do problema
+        // TODO: 29/05/2023 takodje cemo morati da dodamo jos Oprt implementacije kako bi pokrili =...
+        //kreira uslovni Oprt i zove mu fillOutOprt
+        condition = FactoryUtils.getFactory(line[c+2]).getOprt(line[c+2]);
 
-        }else{
-            String x = line[c+1];
-
-        }
+        condition.fillOutOprt(line, c+2);
 
     }
 
