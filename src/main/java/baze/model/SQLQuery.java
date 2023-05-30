@@ -1,9 +1,6 @@
 package baze.model;
 
 import baze.model.implementation.*;
-import baze.model.implementation.agregation.Avg;
-import baze.model.implementation.agregation.Max;
-import baze.model.implementation.agregation.Min;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +23,7 @@ public class SQLQuery {
         hashMap.put("where", new Where("where")); //hashMap.put("like", new Like("like"));
     }
 
-    private void strToObj(String query) {
+    public void strToObj(String query) {
         query = query.toLowerCase(); // postavlja se sva slova na lowercase
         String[] line = query.split(" "); // po space razdvaja reci
 

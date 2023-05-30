@@ -2,11 +2,14 @@ package baze.gui.view;
 
 
 import baze.gui.controller.ReadTextAction;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
-
+@Getter
+@Setter
 public class MainFrame extends JFrame{
 
     private static MainFrame instance = null;
