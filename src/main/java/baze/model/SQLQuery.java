@@ -17,7 +17,7 @@ public class SQLQuery {
 
     public SQLQuery() {
         hashMap.put("from", new From("from"));
-        hashMap.put("groupby", new GroupBy("groupby"));
+        hashMap.put("group", new GroupBy("groupby")); // TODO Treba da se stavi group by al nisam siguran kako dve reci da gledam
         hashMap.put("having", new Having("having")); //hashMap.put("avg", new Avg("avg")); //hashMap.put("max", new Max("max")); //hashMap.put("min", new Min("min"));
         //hashMap.put("join", new Join("join")); //hashMap.put("on", new On("on")); // hashMap.put("using", new Using("using"));
         hashMap.put("select", new Select("select"));
