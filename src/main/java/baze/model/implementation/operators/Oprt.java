@@ -8,11 +8,16 @@ public abstract class Oprt {
     }
 
     public void fillOutOprt(String[] line, int c){//uzima prethodni i sledeci string i pamti u odgovarajuca polja
-        if(c==0 || c== line.length){//provera da li postoje moguci stringovi koji odgovaraju potrebama
+        if(c==0 || c== line.length) {//provera da li postoje moguci stringovi koji odgovaraju potrebama
             return;
         }
-        this.column = line[c-1];
-        this.variable = line[c+1];
+        String x = line[c-1], y = line[c+1];
+
+        if(x.contains("("))x = x.substring(1);
+        if(y.contains(")"))y = y.substring(0,y.length()-1);
+
+        this.column = x;
+        this.variable = y;
     }
 
     public abstract void doOperation();
