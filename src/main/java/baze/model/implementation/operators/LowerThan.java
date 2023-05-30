@@ -7,8 +7,4 @@ public class LowerThan extends Oprt {
         this.equal = equal;
     }
 
-    @Override
-    public void doOperation() {
-
-    }
 }

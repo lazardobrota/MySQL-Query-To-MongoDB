@@ -7,7 +7,7 @@ public abstract class Oprt {
     public Oprt() {
     }
 
-    public void fillOutOprt(String[] line, int c){//uzima prethodni i sledeci string i pamti u odgovarajuca polja
+    public void doOperation(String[] line, int c){//uzima prethodni i sledeci string i pamti u odgovarajuca polja
         if(c==0 || c== line.length) {//provera da li postoje moguci stringovi koji odgovaraju potrebama
             return;
         }
@@ -20,5 +20,4 @@ public abstract class Oprt {
         this.variable = y;
     }
 
-    public abstract void doOperation();
 }

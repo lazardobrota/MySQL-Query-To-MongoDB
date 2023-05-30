@@ -7,8 +7,5 @@ public class GreaterThan extends Oprt {
         this.equal = equal;
     }
 
-    @Override
-    public void doOperation() {
 
-    }
 }
