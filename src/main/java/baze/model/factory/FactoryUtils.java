@@ -18,22 +18,21 @@ public class FactoryUtils {
     public static OprtFactory getFactory(String operation) {
         if (operation.matches(">") || operation.matches(">="))
             return greaterThanFactory;
-        if (operation.matches("like"))
+        if (operation.matches("like")||operation.contains("like("))
             return likeFactory;
         if (operation.matches("<") || operation.matches("<="))
             return lowerThanFactory;
-        if (operation.matches("on"))
+        if (operation.matches("on") || operation.contains("on("))
             return onFactory;
-        if (operation.matches("using"))
+        if (operation.matches("using")||operation.contains("using("))
             return usingFactory;
-
         if (operation.matches("="))
             return equalsFactory;
-        if (operation.matches("avg"))
+        if (operation.matches("avg")||operation.contains("avg("))
             return avgFactory;
-        if (operation.matches("max"))
+        if (operation.matches("max")||operation.contains("max("))
             return maxFactory;
-        if (operation.matches("min"))
+        if (operation.matches("min")||operation.contains("min"))
             return minFactory;
 
         return null;
