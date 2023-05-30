@@ -3,6 +3,8 @@ package baze.model.factory;
 import baze.model.implementation.operators.Oprt;
 
 public class FactoryUtils {
+    private static final AndFactory andFactory = new AndFactory();
+    private static final OrFactory orFactory = new OrFactory();
     private static final GreaterThanFactory greaterThanFactory = new GreaterThanFactory();
     private static final LikeFactory likeFactory = new LikeFactory();
     private static final LowerThanFactory lowerThanFactory = new LowerThanFactory();
@@ -16,6 +18,10 @@ public class FactoryUtils {
 
 
     public static OprtFactory getFactory(String operation) {
+        if (operation.matches("and"))
+            return andFactory;
+        if (operation.matches("or"))
+            return orFactory;
         if (operation.matches(">") || operation.matches(">="))
             return greaterThanFactory;
         if (operation.matches("like")||operation.contains("like("))

@@ -7,4 +7,14 @@ public class LowerThan extends Oprt {
         this.equal = equal;
     }
 
+    //Poziva doOperation od roditelja
+
+    @Override
+    public String toString() {
+        return "LowerThan{" +
+                "equal=" + equal +
+                ", column='" + column + '\'' +
+                ", variable='" + variable + '\'' +
+                '}';
+    }
 }

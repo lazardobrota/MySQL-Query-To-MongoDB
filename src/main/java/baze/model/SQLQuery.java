@@ -1,6 +1,7 @@
 package baze.model;
 
 import baze.model.implementation.*;
+import baze.model.implementation.operators.Join;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ public class SQLQuery {
         hashMap.put("from", new From("from"));
         hashMap.put("groupby", new GroupBy("groupby"));
         hashMap.put("having", new Having("having")); //hashMap.put("avg", new Avg("avg")); //hashMap.put("max", new Max("max")); //hashMap.put("min", new Min("min"));
-        hashMap.put("join", new Join("join")); //hashMap.put("on", new On("on")); // hashMap.put("using", new Using("using"));
+        //hashMap.put("join", new Join("join")); //hashMap.put("on", new On("on")); // hashMap.put("using", new Using("using"));
         hashMap.put("select", new Select("select"));
         hashMap.put("where", new Where("where")); //hashMap.put("like", new Like("like"));
     }

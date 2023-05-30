@@ -7,5 +7,15 @@ public class GreaterThan extends Oprt {
         this.equal = equal;
     }
 
+    //Poziva doOperation od roditelja
 
+
+    @Override
+    public String toString() {
+        return "GreaterThan{" +
+                "equal=" + equal +
+                ", column='" + column + '\'' +
+                ", variable='" + variable + '\'' +
+                '}';
+    }
 }
