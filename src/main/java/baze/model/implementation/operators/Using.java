@@ -13,7 +13,7 @@ public class Using extends Oprt {
 
         }else{
             x = line[c+1];
-            if(!x.contains("(") && !x.contains(")"))return;
+            if(!x.contains("(") || !x.contains(")"))return;
             x = x.substring(1,x.length()-1);
             this.variable = x;
         }
