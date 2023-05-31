@@ -2,19 +2,25 @@ package baze.model;
 
 import baze.model.implementation.*;
 import baze.model.implementation.operators.Join;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SQLQuery {
+@Getter
+@Setter
+public class SQLQuery implements AClause{
     //TODO Ideja: prolazi kroz listu reci i provera da li postoji u hashmapi, ako postoji upise je u hashmapu i stavi to iz hashmap u neku listu
     // zatim tu listu dalje prosledjuje gde treba
+    private static int i = 0; // mora da bude static da bi cuvao ako se prolazi kroz podupit gde je stao posle podupita
 
-    private List<Clause> claues = new ArrayList<>();
+    private List<AClause> claues = new ArrayList<>();
     private Map<String, Clause> hashMap = new HashMap<>(); // cuva sve sto moze da se pravi
 
+    //TODO Ide sada ( select ), znaci zagrad space dawdawdawdaw space zagrada
     public SQLQuery() {
         hashMap.put("from", new From("from"));
         hashMap.put("group", new GroupBy("groupby")); // TODO Treba da se stavi group by al nisam siguran kako dve reci da gledam
@@ -28,9 +34,15 @@ public class SQLQuery {
         query = query.toLowerCase(); // postavlja se sva slova na lowercase
         String[] line = query.split(" "); // po space razdvaja reci
 
-        int i = 0;
         while (i < line.length) {
             if (hashMap.containsKey(line[i])) {
+                //Podupit
+                if (i - 1 > 0 && line[i].matches("select")) {
+
+                    //claues.add(hashMap.get(line[i])); // dodaje u listu ali kao novi SQLQuery
+                    continue;
+                }
+                claues.add(hashMap.get(line[i])); // dodaje u listu
                 int j = i + 1;
                 //Trazi sledecu kljucnu rec da bi znali granice od trenutne
                 while (j < line.length && !hashMap.containsKey(line[j])) {

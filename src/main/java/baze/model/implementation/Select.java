@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Select extends Clause{
 
     private List<String> column;
+    private boolean isDistinct;
 
     public Select(String name) {
         super(name);

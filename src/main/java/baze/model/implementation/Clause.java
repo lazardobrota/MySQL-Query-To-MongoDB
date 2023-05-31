@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public abstract class Clause {
+public abstract class Clause implements AClause{
     private String name;
 
     private List<Oprt> operators;
