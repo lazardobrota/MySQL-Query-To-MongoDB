@@ -33,11 +33,10 @@ public class SQLQuery implements AClause{
                     Stack<Character> zagrade = new Stack<>();
                     zagrade.add('('); // prva zagrada
                     StringBuilder stringBuilder = new StringBuilder();
-
+                    stringBuilder.append(line[i]).append(" "); // pravi string za podupit
                     //Dok ne dodje do kraja stringa ili dok se isprazni stack zagrada(svaki put kad se upare zagrade sklanjaju se sa steka) sto znaci da je dosao do kraja upita
                     // i = i + 1 da bi preskocilo (select
                     for (i = i + 1; i < line.length && !zagrade.isEmpty(); i++) { // OVO SAM ISKOPIRAO IZ MOG KODA IZ ALGORITAMA
-                        stringBuilder.append(line[i]).append(" "); // pravi string za podupit
                         //Prolazi kroz rec
                         for (int j = 0; j < line[i].length(); j++) {
                             char c = line[i].charAt(j);
@@ -51,15 +50,19 @@ public class SQLQuery implements AClause{
                                 zagrade.pop();
                             }
 
+                            //If ce uvek vaziti al za svaki slucaj sam dodao
+                            if (!zagrade.isEmpty())
+                                zagrade.pop(); // izbacuje tu jednu zagradu
+
                             //Resenje
                             if (zagrade.isEmpty()) {
+                                //Poslednja rec ce imati ) u sebi pa da se ukloni
+                                line[i] = line[i].substring(0, line[i].length() - 1); // bez zagrade na kraju
                                 break;
                             }
-
-                            zagrade.pop();
                         }
+                        stringBuilder.append(line[i]).append(" "); // pravi string za podupit
                     }
-
                     SQLQuery podupit = new SQLQuery();
                     podupit.strToObj(stringBuilder.toString());
                     claues.add(podupit); // dodaje u listu ali kao novi SQLQuery

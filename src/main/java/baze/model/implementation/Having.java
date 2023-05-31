@@ -33,17 +33,18 @@ public class Having extends Clause{
                 And and = (And) last;
                 //Uzima operator levo od AND i desni operator tj onaj koji se trenutno gleda
                 and.combine(this.getOperators().get(this.getOperators().size() - 2), operator);
+                this.getOperators().remove(this.getOperators().size() - 2); // brise operator pre AND
             }
             else if (last instanceof Or) { // Ako je OR operator
                 Or or = (Or) last;
                 //Uzima operator levo od OR i desni operator tj onaj koji se trenutno gleda
                 or.combine(this.getOperators().get(this.getOperators().size() - 2), operator);
+                this.getOperators().remove(this.getOperators().size() - 2); // brise operator pre OR
             }
-
+            else //Ako nema last da je AND ili Or
+                this.getOperators().add(operator);//dodaje operator
             // Svaki operator
             operator.doOperation(lines, i); // cuva sta treba u tom operatoru
-
-            this.getOperators().add(operator);//dodaje operator
         }
 
         System.out.println(this.getOperators());
