@@ -7,6 +7,7 @@ public class Min extends Oprt{
 
     @Override
     public void doOperation(String[] line, int c) {
+
         // Bez space
         if(line[c].contains("(") && line[c].contains(")")){
             this.variable = line[c].substring(line[c].indexOf('(')+1, line[c].indexOf(')'));
