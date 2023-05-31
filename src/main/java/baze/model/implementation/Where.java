@@ -1,9 +1,7 @@
 package baze.model.implementation;
 
-import baze.model.factory.FactoryUtils;
-import baze.model.factory.OprtFactory;
+import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.operators.And;
-import baze.model.implementation.operators.GreaterThan;
 import baze.model.implementation.operators.Oprt;
 import baze.model.implementation.operators.Or;
 
@@ -11,8 +9,7 @@ import java.util.Objects;
 
 public class Where extends Clause{
 
-    public Where(String name) {
-        super(name);
+    public Where() {
 
         //hashMap.put("<", new GreaterThan())
     }

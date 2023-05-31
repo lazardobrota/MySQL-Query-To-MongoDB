@@ -1,13 +1,11 @@
 package baze.model.implementation.operators;
 
-import baze.model.factory.FactoryUtils;
+import baze.model.factory.oprt.FactoryUtils;
 
 public class Count extends Oprt{
 
     private Oprt operation;
     public Count() {
-
-
     }
 
     @Override

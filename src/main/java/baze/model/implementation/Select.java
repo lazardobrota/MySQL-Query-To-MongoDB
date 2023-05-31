@@ -1,12 +1,8 @@
 package baze.model.implementation;
 
-import baze.model.factory.FactoryUtils;
-import baze.model.implementation.operators.Avg;
-import baze.model.implementation.operators.Max;
-import baze.model.implementation.operators.Min;
+import baze.model.factory.oprt.FactoryUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,8 +11,7 @@ public class Select extends Clause{
     private List<String> column;
     private boolean isDistinct;
 
-    public Select(String name) {
-        super(name);
+    public Select() {
         column = new ArrayList<>();
     }
 

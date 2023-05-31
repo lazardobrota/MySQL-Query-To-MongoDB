@@ -7,8 +7,7 @@ import java.util.List;
 public class GroupBy extends Clause{
     private List<String> columns;
 
-    public GroupBy(String name) {
-        super(name);
+    public GroupBy() {
         columns = new ArrayList<>();
     }
 

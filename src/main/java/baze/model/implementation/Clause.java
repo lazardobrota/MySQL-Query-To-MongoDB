@@ -12,13 +12,11 @@ import java.util.Map;
 @Getter
 @Setter
 public abstract class Clause implements AClause{
-    private String name;
 
     private List<Oprt> operators;
     private Map<String, Oprt> hashMap;
 
-    public Clause(String name) {
-        this.name = name;
+    public Clause() {
         operators = new ArrayList<>();
         hashMap = new HashMap<>();
     }
