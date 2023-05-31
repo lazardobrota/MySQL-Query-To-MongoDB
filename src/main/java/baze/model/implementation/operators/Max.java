@@ -9,9 +9,9 @@ public class Max extends Oprt{
     public void doOperation(String[] line, int c) {
         //Bez space
         if(line[c].contains("(") && line[c].contains(")")){
-            this.variable = line[c].substring(line[c].indexOf('('), line[c].indexOf(')'));
+            this.variable = line[c].substring(line[c].indexOf('(')+1, line[c].indexOf(')'));
         }else{ // Sa space
-            variable = line[c+1].substring(line[c+1].indexOf('('), line[c+1].indexOf(')'));
+            variable = line[c+1].substring(line[c+1].indexOf('(')+1, line[c+1].indexOf(')'));
         }
     }
 
