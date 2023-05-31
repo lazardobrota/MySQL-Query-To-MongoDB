@@ -13,6 +13,7 @@ public class FactoryUtils {
     private static final AvgFactory avgFactory = new AvgFactory();
     private static final MaxFactory maxFactory = new MaxFactory();
     private static final MinFactory minFactory = new MinFactory();
+    private static final JoinFactory joinFactory = new JoinFactory();
 
 
     public static OprtFactory getFactory(String operation) {
@@ -38,6 +39,8 @@ public class FactoryUtils {
             return maxFactory;
         if (operation.matches("min")||operation.contains("min"))
             return minFactory;
+        if (operation.equals("join"))
+            return joinFactory;
 
         return null;
     }
