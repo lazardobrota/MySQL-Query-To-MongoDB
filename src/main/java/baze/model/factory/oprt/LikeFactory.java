@@ -1,4 +1,4 @@
-package baze.model.factory;
+package baze.model.factory.oprt;
 
 import baze.model.implementation.operators.Like;
 import baze.model.implementation.operators.Oprt;

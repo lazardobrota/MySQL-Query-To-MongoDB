@@ -1,7 +1,6 @@
-package baze.model.factory;
+package baze.model.factory.oprt;
 
 import baze.model.implementation.operators.Avg;
-import baze.model.implementation.operators.Equals;
 import baze.model.implementation.operators.Oprt;
 
 public class AvgFactory extends OprtFactory{

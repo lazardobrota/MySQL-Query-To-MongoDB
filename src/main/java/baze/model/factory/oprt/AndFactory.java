@@ -1,4 +1,4 @@
-package baze.model.factory;
+package baze.model.factory.oprt;
 
 import baze.model.implementation.operators.And;
 import baze.model.implementation.operators.Oprt;

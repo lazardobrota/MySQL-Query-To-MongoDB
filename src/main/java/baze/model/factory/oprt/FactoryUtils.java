@@ -1,6 +1,4 @@
-package baze.model.factory;
-
-import baze.model.implementation.operators.Oprt;
+package baze.model.factory.oprt;
 
 public class FactoryUtils {
     private static final AndFactory andFactory = new AndFactory();

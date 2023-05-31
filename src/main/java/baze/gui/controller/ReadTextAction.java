@@ -1,7 +1,7 @@
 package baze.gui.controller;
 
 import baze.gui.view.MainFrame;
-import baze.model.SQLQuery;
+import baze.model.implementation.SQLQuery;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,6 +1,5 @@
-package baze.model.factory;
+package baze.model.factory.oprt;
 
-import baze.model.implementation.operators.Equals;
 import baze.model.implementation.operators.Min;
 import baze.model.implementation.operators.Oprt;
 
