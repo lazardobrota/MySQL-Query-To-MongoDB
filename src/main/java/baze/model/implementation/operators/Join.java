@@ -8,4 +8,12 @@ public class Join extends Oprt{
     public void doOperation(String[] line, int c) {
         super.doOperation(line, c);
     }
+
+    @Override
+    public String toString() {
+        return "Join{" +
+                "column='" + column + '\'' +
+                ", variable='" + variable + '\'' +
+                '}';
+    }
 }
