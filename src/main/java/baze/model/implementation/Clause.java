@@ -14,8 +14,8 @@ import java.util.Map;
 public abstract class Clause {
     private String name;
 
-    List<Oprt> operators;
-    Map<String, Oprt> hashMap;
+    private List<Oprt> operators;
+    private Map<String, Oprt> hashMap;
 
     public Clause(String name) {
         this.name = name;

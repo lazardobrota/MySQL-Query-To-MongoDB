@@ -1,8 +1,8 @@
 package baze.model.implementation.operators;
 
 public class Or extends Oprt{
-    Oprt left;
-    Oprt right;
+    private Oprt left;
+    private Oprt right;
     public Or() {
     }
 

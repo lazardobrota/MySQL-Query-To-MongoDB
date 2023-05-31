@@ -7,8 +7,8 @@ import lombok.Setter;
 @Setter
 public class And extends Oprt{
 
-    Oprt left;
-    Oprt right;
+    private Oprt left;
+    private Oprt right;
     public And() {
     }
 

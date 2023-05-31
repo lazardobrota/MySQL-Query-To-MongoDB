@@ -12,8 +12,8 @@ public class SQLQuery {
     //TODO Ideja: prolazi kroz listu reci i provera da li postoji u hashmapi, ako postoji upise je u hashmapu i stavi to iz hashmap u neku listu
     // zatim tu listu dalje prosledjuje gde treba
 
-    List<Clause> claues = new ArrayList<>();
-    Map<String, Clause> hashMap = new HashMap<>(); // cuva sve sto moze da se pravi
+    private List<Clause> claues = new ArrayList<>();
+    private Map<String, Clause> hashMap = new HashMap<>(); // cuva sve sto moze da se pravi
 
     public SQLQuery() {
         hashMap.put("from", new From("from"));
