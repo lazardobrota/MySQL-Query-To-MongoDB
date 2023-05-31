@@ -4,6 +4,12 @@ public class Equals extends Oprt{
     public Equals() {
     }
 
+    @Override
+    public void doOperation(String[] line, int c) {
+        super.doOperation(line, c);
+
+    }
+
     //Poziva doOperation od roditelja
 
     @Override
