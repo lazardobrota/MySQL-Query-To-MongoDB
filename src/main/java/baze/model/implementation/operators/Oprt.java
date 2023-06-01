@@ -1,13 +1,17 @@
 package baze.model.implementation.operators;
 
+import baze.model.factory.oprt.FactoryUtils;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Getter
 @Setter
 public abstract class Oprt {
     protected String column; // levo, ono sto uzima iz baze podataka
     protected String variable; // desno, uslov sta uzima iz baze
+    protected Oprt agregation;
 
     public Oprt() {
     }
@@ -18,10 +22,16 @@ public abstract class Oprt {
         }
         String x = line[c-1], y = line[c+1];
 
-        if(x.contains("("))x = x.substring(1);
-        if(y.contains(")"))y = y.substring(0,y.length()-1);
+        if (FactoryUtils.getFactory(x) != null) {
+            agregation = Objects.requireNonNull(FactoryUtils.getFactory(x)).getOprt(x);
+            agregation.doOperation(line, c - 1);
+        }
+        else {
+            if(x.contains("("))x = x.substring(1);
+            this.column = x;
+        }
 
-        this.column = x;
+        if(y.contains(")"))y = y.substring(0,y.length()-1);
         this.variable = y;
     }
 

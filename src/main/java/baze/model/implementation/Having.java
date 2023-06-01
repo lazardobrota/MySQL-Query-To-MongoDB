@@ -11,7 +11,7 @@ public class Having extends Clause{
     public Having() {
     }
 
-    //TODO Mozda greaterThan, LowerThan, Equals, ... trebaju da imaju i klase agregacije u sebi zbog having
+    //TODO MORACE DA PRESKACE REDOVE GDE SE POJAVE AGREGACIJE, SAMO UNUTAR >, <, = MOZE DA IH GLEDA
     @Override
     public void fillOut(String[] lines, int l, int r) {
         for (int i = l; i < r; i++) {

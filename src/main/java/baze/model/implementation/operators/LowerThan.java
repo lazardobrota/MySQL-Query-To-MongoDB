@@ -11,10 +11,11 @@ public class LowerThan extends Oprt {
 
     @Override
     public String toString() {
-        return "LowerThan{" +
+        return "GreaterThan{" +
                 "equal=" + equal +
                 ", column='" + column + '\'' +
                 ", variable='" + variable + '\'' +
+                ", agregation=" + agregation +
                 '}';
     }
 }

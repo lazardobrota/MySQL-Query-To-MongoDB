@@ -2,7 +2,6 @@ package baze.model.implementation.operators;
 
 public class GreaterThan extends Oprt {
     private boolean equal; // da li je ovo >= ili >
-    private Oprt agregation;
 
     public GreaterThan(boolean equal) {
         this.equal = equal;
@@ -17,6 +16,7 @@ public class GreaterThan extends Oprt {
                 "equal=" + equal +
                 ", column='" + column + '\'' +
                 ", variable='" + variable + '\'' +
+                ", agregation=" + agregation +
                 '}';
     }
 }
