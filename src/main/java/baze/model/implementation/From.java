@@ -46,4 +46,12 @@ public class From extends Clause {
         System.out.println("From: " + column);
         System.out.println("Operators: " + this.getOperators());
     }
+
+    @Override
+    public String toString() {
+        return "From{" +
+                "column=" + column +
+                ", operators=" + getOperators() +
+                '}';
+    }
 }
