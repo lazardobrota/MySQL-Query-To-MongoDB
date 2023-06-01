@@ -4,9 +4,13 @@ import baze.model.factory.clause.FactoryUtilsClause;
 import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.AClause;
 import baze.model.implementation.Clause;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
+@Getter
+@Setter
 //In se koristi za podupit
 public class In extends Oprt{
 // izgled u okviru unosa:

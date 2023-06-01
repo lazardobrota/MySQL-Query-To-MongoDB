@@ -43,7 +43,7 @@ public class From extends Clause {
         //Ako je operator prazan znaci da nema operatora i da se samo jedna kolona iz tabele koristi
         if (this.getOperators().isEmpty())
             column.add(lines[l + 1]); // upisuje se naziv te kolone
-        System.out.println(column);
+        System.out.println("From: " + column);
         System.out.println("Operators: " + this.getOperators());
     }
 }

@@ -43,4 +43,12 @@ public class Select extends Clause{
         System.out.println("select: " + column);
         System.out.println("operators: " + getOperators());
     }
+
+    @Override
+    public String toString() {
+        return "Select{" +
+                "column=" + column +
+                ", operators=" + getOperators() +
+                '}';
+    }
 }

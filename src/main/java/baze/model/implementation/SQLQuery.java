@@ -73,13 +73,20 @@ public class SQLQuery implements AClause{
                     }
                     SQLQuery podupit = new SQLQuery();
                     podupit.strToObj(stringBuilder.toString());
-                    /* TODO Treba da se stavi podupit u neki operator
+                    // TODO Treba da se stavi podupit u neki operator
                     Clause where = (Clause) claues.get(claues.size() - 1); // uzima where clause
-                    In in = (In) where.getOperators().get(where.getOperators().size() - 1); // sigurno je poslednji in ako postoji podupit
-                    in.setPodupit(podupit);
-                    System.out.println(in);
-                     */
-                    claues.add(podupit); // dodaje u listu ali kao novi SQLQuery
+                    for (int j = 0; j < where.getOperators().size(); j++) {
+                        if (where.getOperators().get(j) instanceof In) {
+                            In in = (In) where.getOperators().get(where.getOperators().size() - 1); // sigurno je poslednji in ako postoji podupit
+                            if (in.getPodupit() != null)
+                                continue;
+                            in.setPodupit(podupit);
+                            System.out.println(((Clause) claues.get(claues.size() - 1)).getOperators());
+                            break;
+                        }
+                    }
+                    //System.out.println(((SQLQuery)((In)((Clause) claues.get(claues.size() - 1)).getOperators().get(0)).getPodupit()).getClaues().get(0));
+                    //claues.add(podupit); // dodaje u listu ali kao novi SQLQuery
                     continue;
                 }
                 Clause clause = Objects.requireNonNull(FactoryUtilsClause.getFactory(line[i])).getClause();
