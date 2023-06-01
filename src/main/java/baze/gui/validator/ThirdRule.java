@@ -23,6 +23,52 @@ public class ThirdRule extends Rule{
                 continue;
 
             Where where = (Where) sqlQuery.getClaues().get(i);
+
+            for (int j = 0; j < where.getOperators().size(); j++) {
+                Oprt oprt = where.getOperators().get(j);
+
+                //Pronasao je agregaciju
+                if (oprt.getAgregation() != null) {
+                    agregation = true;
+                    break;
+                }
+            }
+
+            //Ako nema agregaciju
+            if (!agregation)
+                return true;
+
+            // Pronaso je where ako je dovde dosao i ne moze vise where od jednog da postoji tako da nema potreba da nastavi da gleda for petlju
+            // ovo takodje znaci da je agregation == true pa postoji agregacija :(
+            break;
+        }
+
+        //Ako where ne postoji
+        if (!agregation)
+            return true;
+
+        message();
+        return false;
+    }
+
+    @Override
+    public void message() {
+        MainFrame.getInstance().errorMessage("Where ne moze da ima agregacije");
+    }
+}
+
+/*
+@Override
+    public boolean ruleCheck(SQLQuery sqlQuery) {
+
+        boolean agregation = false;
+        for (int i = 0; i < sqlQuery.getClaues().size(); i++) {
+
+            // Dok ne nadje where preskace
+            if (!(sqlQuery.getClaues().get(i) instanceof Where))
+                continue;
+
+            Where where = (Where) sqlQuery.getClaues().get(i);
             //Prolazi kroz sve operatore od where
             for (int j = 0; j < where.getOperators().size(); j++) {
 
@@ -87,9 +133,4 @@ public class ThirdRule extends Rule{
 
         return true;
     }
-
-    @Override
-    public void message() {
-        MainFrame.getInstance().errorMessage("Where ne moze da ima agregacije");
-    }
-}
+ */
