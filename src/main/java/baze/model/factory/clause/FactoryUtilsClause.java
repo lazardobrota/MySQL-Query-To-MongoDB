@@ -7,6 +7,7 @@ public class FactoryUtilsClause {
     private static final HavingFactory havingFactory = new HavingFactory();
     private static final SelectFactory selectFactory = new SelectFactory();
     private static final WhereFactory whereFactory = new WhereFactory();
+    private static final OrderByFactory orderByFactory = new OrderByFactory();
 
     public static ClauseFactory getFactory(String clause) {
         if (clause.equals("from"))
@@ -19,6 +20,9 @@ public class FactoryUtilsClause {
             return selectFactory;
         if (clause.equals("where"))
             return whereFactory;
+        if (clause.equals("order"))
+            return orderByFactory;
+
         return null;
     }
 }
