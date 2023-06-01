@@ -14,6 +14,7 @@ public class FactoryUtils {
     private static final MaxFactory maxFactory = new MaxFactory();
     private static final MinFactory minFactory = new MinFactory();
     private static final JoinFactory joinFactory = new JoinFactory();
+    private static final InFactory inFactory = new InFactory();
 
 
     public static OprtFactory getFactory(String operation) {
@@ -41,6 +42,8 @@ public class FactoryUtils {
             return minFactory;
         if (operation.equals("join"))
             return joinFactory;
+        if (operation.equals("in"))
+            return inFactory;
 
         return null;
     }

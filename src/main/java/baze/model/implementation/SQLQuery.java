@@ -2,6 +2,7 @@ package baze.model.implementation;
 
 import baze.model.factory.clause.FactoryUtilsClause;
 import baze.model.implementation.*;
+import baze.model.implementation.operators.In;
 import baze.model.implementation.operators.Join;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +19,13 @@ public class SQLQuery implements AClause{
 
     //TODO Ide sada ( select ), znaci zagrad space dawdawdawdaw space zagrada
     public SQLQuery() {
+    }
+
+    @Override
+    public String toString() {
+        return "SQLQuery{" +
+                "claues=" + claues +
+                '}';
     }
 
     public void strToObj(String query) {
@@ -65,6 +73,12 @@ public class SQLQuery implements AClause{
                     }
                     SQLQuery podupit = new SQLQuery();
                     podupit.strToObj(stringBuilder.toString());
+                    /* TODO Treba da se stavi podupit u neki operator
+                    Clause where = (Clause) claues.get(claues.size() - 1); // uzima where clause
+                    In in = (In) where.getOperators().get(where.getOperators().size() - 1); // sigurno je poslednji in ako postoji podupit
+                    in.setPodupit(podupit);
+                    System.out.println(in);
+                     */
                     claues.add(podupit); // dodaje u listu ali kao novi SQLQuery
                     continue;
                 }
@@ -83,6 +97,8 @@ public class SQLQuery implements AClause{
 
             i++;
         }
+
+
 
         /*TODO ovo je za validator
         //Ako nema select ili from nema sta dalje da gleda

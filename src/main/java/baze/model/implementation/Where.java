@@ -15,7 +15,6 @@ public class Where extends Clause{
     }
 
     //Where: Equals, GreaterThan, LowerThan, Like, AND, OR
-    //TODO IDEJA ZA KASNIJE KLASE : Dodaje u listu i proverav svaki drugi da li je AND ili OR ako nisu onda znaci da radi sa jednom stvari, u suprotnom nek ulazi u AND i OR samo
     @Override
     public void fillOut(String[] lines, int l, int r) {
         // TODO OVO KORISTIS KAD POZIVAS FACTORY

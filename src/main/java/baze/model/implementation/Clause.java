@@ -14,12 +14,17 @@ import java.util.Map;
 public abstract class Clause implements AClause{
 
     private List<Oprt> operators;
-    private Map<String, Oprt> hashMap;
 
     public Clause() {
         operators = new ArrayList<>();
-        hashMap = new HashMap<>();
     }
 
     public abstract void fillOut(String[] lines, int l, int r);
+
+    @Override
+    public String toString() {
+        return "Clause{" +
+                "operators=" + operators +
+                '}';
+    }
 }
