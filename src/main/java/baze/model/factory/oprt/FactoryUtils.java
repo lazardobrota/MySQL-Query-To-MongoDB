@@ -16,9 +16,11 @@ public class FactoryUtils {
     private static final JoinFactory joinFactory = new JoinFactory();
     private static final InFactory inFactory = new InFactory();
     private static final CountFactory countFactory = new CountFactory();
-
+    private static final RownumFactory rownumFactory = new RownumFactory();
 
     public static OprtFactory getFactory(String operation) {
+        if(operation.matches("rownum"))
+            return rownumFactory;
         if(operation.matches("count") || operation.contains("count"))
             return countFactory;
         if (operation.matches("and"))

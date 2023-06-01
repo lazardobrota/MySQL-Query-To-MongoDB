@@ -22,6 +22,10 @@ public class Select extends Clause{
         //Prolazi kroz sve space-ove za koje znaju da pripadaju select
         for (int i = l + 1 ;i < r; i++) {
             //Ako treba da ukloni zares izmedju njih
+            if(lines[i].matches("distinct")){
+                this.isDistinct = true;
+                continue;
+            }
             String[] arr = lines[i].split(",");// deli po zarecu
 
             //Dodaje ih sve listu koji nemaju min, max, avg
