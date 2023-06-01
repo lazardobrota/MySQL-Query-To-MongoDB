@@ -5,10 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class And extends Oprt{
+public class And extends CombineOprt{
 // uzgled u okviru unosa: oprt and oprt
-    private Oprt left;
-    private Oprt right;
     public And() {
     }
 
