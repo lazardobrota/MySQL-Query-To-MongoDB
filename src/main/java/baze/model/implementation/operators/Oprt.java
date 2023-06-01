@@ -22,17 +22,25 @@ public abstract class Oprt {
         }
         String x = line[c-1], y = line[c+1];
 
+        // Za x ako je neka operacija da operaciju sacuva
         if (FactoryUtils.getFactory(x) != null) {
             agregation = Objects.requireNonNull(FactoryUtils.getFactory(x)).getOprt(x);
             agregation.doOperation(line, c - 1);
         }
-        else {
+        else { // ako nije operacija da sacuva string
             if(x.contains("("))x = x.substring(1);
             this.column = x;
         }
 
-        if(y.contains(")"))y = y.substring(0,y.length()-1);
-        this.variable = y;
+        // Za y ako je neka operacija da operaciju sacuva
+        if (FactoryUtils.getFactory(y) != null) {
+            agregation = Objects.requireNonNull(FactoryUtils.getFactory(y)).getOprt(y);
+            agregation.doOperation(line, c + 1);
+        }
+        else { // ako nije operacija da sacuva string
+            if(y.contains(")"))y = y.substring(0,y.length()-1);
+            this.variable = y;
+        }
     }
 
 }

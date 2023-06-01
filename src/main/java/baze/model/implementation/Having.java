@@ -1,9 +1,7 @@
 package baze.model.implementation;
 
 import baze.model.factory.oprt.FactoryUtils;
-import baze.model.implementation.operators.And;
-import baze.model.implementation.operators.Oprt;
-import baze.model.implementation.operators.Or;
+import baze.model.implementation.operators.*;
 
 import java.util.Objects;
 
@@ -21,8 +19,12 @@ public class Having extends Clause{
 
             // Uzima operator
             Oprt operator = Objects.requireNonNull(FactoryUtils.getFactory(lines[i])).getOprt(lines[i]);
-            //Posebno za AND i OR
 
+            //
+            if (operator instanceof Max || operator instanceof Avg || operator instanceof Min)
+                continue;
+
+            //Posebno za AND i OR
             Oprt last = null;
             //Ako nije prazna lista operatora
             if (!this.getOperators().isEmpty()) {
@@ -47,6 +49,6 @@ public class Having extends Clause{
             operator.doOperation(lines, i); // cuva sta treba u tom operatoru
         }
 
-        System.out.println(this.getOperators());
+        System.out.println("Where: " + this.getOperators());
     }
 }
