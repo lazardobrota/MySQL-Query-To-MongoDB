@@ -20,6 +20,6 @@ public class GroupBy extends Clause{
             columns.addAll(Arrays.asList(arr)); // stavlja tu jednu rec u listu
         }
 
-        System.out.println(columns);
+        System.out.println("GroupBy: " + columns);
     }
 }

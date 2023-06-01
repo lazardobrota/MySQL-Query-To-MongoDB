@@ -17,6 +17,7 @@ public class Desc extends Oprt{
     public String toString() {
         return "Desc{" +
                 "isDesc=" + isDesc +
+                ", column='" + column + '\'' +
                 '}';
     }
 }
