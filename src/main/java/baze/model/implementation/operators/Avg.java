@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Avg extends Oprt {
+// uzgled u okviru unosa: avg(nesto) / avg (nesto)
 
     public Avg() {
     }

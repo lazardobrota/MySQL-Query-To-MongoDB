@@ -1,6 +1,7 @@
 package baze.model.implementation.operators;
 
 public class Using extends Oprt {
+    // uzgled u okviru unosa: using nesto
     public Using() {
     }
     @Override

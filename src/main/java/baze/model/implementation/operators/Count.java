@@ -3,6 +3,7 @@ package baze.model.implementation.operators;
 import baze.model.factory.oprt.FactoryUtils;
 
 public class Count extends Oprt{
+// uzgled u okviru unosa: count(oprt)
 
     private Oprt operation;
     public Count() {
@@ -10,7 +11,7 @@ public class Count extends Oprt{
 
     @Override
     public void doOperation(String[] line, int c) {
-        operation = FactoryUtils.getFactory(line[c+1].substring(1)).createOprt(line[c+1].substring(1));
+        operation = FactoryUtils.getFactory(line[c]).createOprt(line[c].substring(1));
         if(operation!=null){
             return;
         }

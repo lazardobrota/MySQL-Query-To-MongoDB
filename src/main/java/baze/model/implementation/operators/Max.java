@@ -3,6 +3,7 @@ package baze.model.implementation.operators;
 import baze.model.implementation.Clause;
 
 public class Max extends Oprt{
+// uzgled u okviru unosa: max(nesto) / max (nesto)
 
 
     @Override

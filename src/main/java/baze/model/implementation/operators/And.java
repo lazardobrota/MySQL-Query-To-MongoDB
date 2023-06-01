@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class And extends Oprt{
-
+// uzgled u okviru unosa: oprt and oprt
     private Oprt left;
     private Oprt right;
     public And() {

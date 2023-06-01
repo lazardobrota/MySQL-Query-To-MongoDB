@@ -42,6 +42,7 @@ public class Where extends Clause{
                 //Uzima operator levo od AND i desni operator tj onaj koji se trenutno gleda
                 and.combine(this.getOperators().get(this.getOperators().size() - 2), operator);
                 this.getOperators().remove(this.getOperators().size() - 2); // brise operator pre AND
+
             }
             else if (last instanceof Or) { // Ako je OR operator
                 Or or = (Or) last;
@@ -49,11 +50,19 @@ public class Where extends Clause{
                 or.combine(this.getOperators().get(this.getOperators().size() - 2), operator);
                 this.getOperators().remove(this.getOperators().size() - 2); // brise operator pre OR
             }
-            else //Ako nema last da je AND ili Or
-                this.getOperators().add(operator);//dodaje operator
+             //Ako nema last da je AND ili Or
+            this.getOperators().add(operator);//dodaje operator
             // Svaki operator
             operator.doOperation(lines, i); // cuva sta treba u tom operatoru
         }
+        //proverava da li treba poslednji Oprt da se brise jer se vec nalazu u And/Or
+        if(getOperators().size() < 2){
+            System.out.println("Where: " + this.getOperators());
+            return;
+        }
+        Oprt o = getOperators().get(getOperators().size()-2);
+        if(o instanceof Or ||o instanceof And)
+            getOperators().remove(getOperators().size()-1);
 
         System.out.println("Where: " + this.getOperators());
     }

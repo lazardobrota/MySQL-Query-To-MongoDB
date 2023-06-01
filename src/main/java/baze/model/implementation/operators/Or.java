@@ -1,6 +1,7 @@
 package baze.model.implementation.operators;
 
 public class Or extends Oprt{
+    // uzgled u okviru unosa: oprt or oprt
     private Oprt left;
     private Oprt right;
     public Or() {

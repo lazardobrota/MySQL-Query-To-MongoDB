@@ -3,6 +3,7 @@ package baze.model.implementation.operators;
 import baze.model.implementation.Clause;
 
 public class Min extends Oprt{
+// uzgled u okviru unosa: min(nesto) / min (nesto)
 
 
     @Override

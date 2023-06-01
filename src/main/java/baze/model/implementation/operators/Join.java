@@ -1,6 +1,8 @@
 package baze.model.implementation.operators;
 
 public class Join extends Oprt{
+
+    // izgled u okviru unosa: nesto join nesto
     public Join() {
     }
 

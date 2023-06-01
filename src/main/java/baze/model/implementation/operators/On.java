@@ -6,6 +6,7 @@ import baze.model.implementation.Clause;
 import java.util.Objects;
 
 public class On extends Oprt {
+// uzgled u okviru unosa: on oprt
 
     private Oprt condition;
     public On() {

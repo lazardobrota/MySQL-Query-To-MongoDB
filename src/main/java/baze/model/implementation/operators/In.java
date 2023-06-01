@@ -9,6 +9,7 @@ import java.util.Objects;
 
 //In se koristi za podupit
 public class In extends Oprt{
+// izgled u okviru unosa:
 
     private AClause podupit;
 

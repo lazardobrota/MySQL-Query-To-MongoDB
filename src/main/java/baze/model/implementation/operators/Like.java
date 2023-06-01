@@ -1,6 +1,7 @@
 package baze.model.implementation.operators;
 
 public class Like extends Oprt {
+// uzgled u okviru unosa: nesto like nesto
 
     public Like() {
     }

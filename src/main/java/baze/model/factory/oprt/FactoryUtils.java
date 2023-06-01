@@ -15,30 +15,33 @@ public class FactoryUtils {
     private static final MinFactory minFactory = new MinFactory();
     private static final JoinFactory joinFactory = new JoinFactory();
     private static final InFactory inFactory = new InFactory();
+    private static final CountFactory countFactory = new CountFactory();
 
 
     public static OprtFactory getFactory(String operation) {
+        if(operation.matches("count") || operation.contains("count"))
+            return countFactory;
         if (operation.matches("and"))
             return andFactory;
         if (operation.matches("or"))
             return orFactory;
         if (operation.matches(">") || operation.matches(">="))
             return greaterThanFactory;
-        if (operation.matches("like")||operation.contains("like("))
+        if (operation.matches("like") || operation.contains("like("))
             return likeFactory;
         if (operation.matches("<") || operation.matches("<="))
             return lowerThanFactory;
         if (operation.matches("on") || operation.contains("on("))
             return onFactory;
-        if (operation.matches("using")||operation.contains("using("))
+        if (operation.matches("using") || operation.contains("using("))
             return usingFactory;
         if (operation.matches("="))
             return equalsFactory;
-        if (operation.matches("avg")||operation.contains("avg("))
+        if (operation.matches("avg") || operation.contains("avg("))
             return avgFactory;
-        if (operation.matches("max")||operation.contains("max("))
+        if (operation.matches("max") || operation.contains("max("))
             return maxFactory;
-        if (operation.matches("min")||operation.contains("min"))
+        if (operation.matches("min") || operation.contains("min"))
             return minFactory;
         if (operation.equals("join"))
             return joinFactory;
