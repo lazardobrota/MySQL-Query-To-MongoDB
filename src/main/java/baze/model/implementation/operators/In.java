@@ -20,12 +20,9 @@ public class In extends Oprt{
     @Override
     public void doOperation(String[] line, int c) {
 
-        this.column = line[c - 1];
+        //this.column = line[c - 1];
     }
 
-    public void setPodupit(AClause podupit) {
-        this.podupit = podupit;
-    }
 
     @Override
     public String toString() {

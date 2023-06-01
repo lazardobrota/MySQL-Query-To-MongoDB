@@ -20,6 +20,32 @@ public class Having extends Clause{
             // Uzima operator
             Oprt operator = Objects.requireNonNull(FactoryUtils.getFactory(lines[i])).getOprt(lines[i]);
 
+            // Preskace ako je agregacija (cuva ih >, =, <)
+            if (operator instanceof Max || operator instanceof Avg || operator instanceof Min)
+                continue;
+
+            //Ako nema last da je AND ili Or
+            this.getOperators().add(operator);//dodaje operator
+            // Svaki operator
+            operator.doOperation(lines, i); // cuva sta treba u tom operatoru
+        }
+
+        System.out.println("Having: " + this.getOperators());
+    }
+}
+
+/*
+
+    @Override
+    public void fillOut(String[] lines, int l, int r) {
+        for (int i = l; i < r; i++) {
+            //Kada rec nije null to znaci da je operator neki
+            if (FactoryUtils.getFactory(lines[i]) == null)
+                continue;
+
+            // Uzima operator
+            Oprt operator = Objects.requireNonNull(FactoryUtils.getFactory(lines[i])).getOprt(lines[i]);
+
             //
             if (operator instanceof Max || operator instanceof Avg || operator instanceof Min)
                 continue;
@@ -58,4 +84,4 @@ public class Having extends Clause{
 
         System.out.println("Having: " + this.getOperators());
     }
-}
+ */

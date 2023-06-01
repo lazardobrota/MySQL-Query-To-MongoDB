@@ -11,8 +11,8 @@ public class And extends CombineOprt{
     }
 
     public void combine(Oprt left, Oprt right) {
-        this.left = left;
-        this.right = right;
+        //this.left = left;
+        //this.right = right;
     }
 
     @Override
