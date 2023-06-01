@@ -48,6 +48,12 @@ public class MainFrame extends JFrame{
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+    //Ispisuje error
+    public void errorMessage(String message) {
+        JOptionPane.showMessageDialog(new JDialog(), message);
+    }
+
     public static MainFrame getInstance(){
         if (instance == null) {
             instance = new MainFrame();
