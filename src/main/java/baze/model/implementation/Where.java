@@ -53,7 +53,7 @@ public class Where extends Clause{
             operator.doOperation(lines, i); // cuva sta treba u tom operatoru
         }
 
-        System.out.println(this.getOperators());
+        System.out.println("Where: " + this.getOperators());
     }
 
 }
