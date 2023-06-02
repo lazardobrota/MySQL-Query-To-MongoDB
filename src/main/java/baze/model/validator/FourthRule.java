@@ -1,7 +1,5 @@
-package baze.gui.validator;
+package baze.model.validator;
 
-import baze.gui.view.MainFrame;
-import baze.model.implementation.AClause;
 import baze.model.implementation.From;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.operators.Join;
@@ -44,12 +42,7 @@ public class FourthRule extends Rule{
             //Nece se ponovo pojaviti from, samo jednom moze u jednom upitu
             break;
         }
-        message();
+        setMessage("Fale Using ili On");
         return false;
-    }
-
-    @Override
-    public void message() {
-        MainFrame.getInstance().errorMessage("Fale Using ili On");
     }
 }

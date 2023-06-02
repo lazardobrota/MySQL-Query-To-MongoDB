@@ -1,6 +1,6 @@
 package baze.gui.controller;
 
-import baze.gui.validator.Validator;
+import baze.model.validator.Validator;
 import baze.gui.view.MainFrame;
 import baze.model.implementation.SQLQuery;
 
@@ -13,6 +13,8 @@ public class ReadTextAction extends AbstractAction {
         SQLQuery sqlQuery = new SQLQuery();
         sqlQuery.strToObj(MainFrame.getInstance().getTextArea().getText()); // prosledjuje mu tekst koji je napisan u tekst area
         Validator validator = new Validator(sqlQuery);
-        validator.checkRules();
+        if (!validator.checkRules()) {
+            MainFrame.getInstance().errorMessage(validator.getMessage());
+        }
     }
 }

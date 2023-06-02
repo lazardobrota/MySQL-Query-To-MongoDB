@@ -1,9 +1,6 @@
-package baze.gui.validator;
+package baze.model.validator;
 
-import baze.gui.view.MainFrame;
-import baze.model.implementation.AClause;
 import baze.model.implementation.SQLQuery;
-import baze.model.implementation.Select;
 import baze.model.implementation.Where;
 import baze.model.implementation.operators.*;
 
@@ -47,13 +44,8 @@ public class ThirdRule extends Rule{
         if (!agregation)
             return true;
 
-        message();
+        setMessage("Where ne moze da ima agregacije");
         return false;
-    }
-
-    @Override
-    public void message() {
-        MainFrame.getInstance().errorMessage("Where ne moze da ima agregacije");
     }
 }
 

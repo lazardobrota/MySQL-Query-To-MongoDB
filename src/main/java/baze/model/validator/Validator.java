@@ -1,17 +1,22 @@
-package baze.gui.validator;
+package baze.model.validator;
 
 import baze.model.implementation.AClause;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.Where;
 import baze.model.implementation.operators.In;
 import baze.model.implementation.operators.Oprt;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class Validator {
     List<Rule> rules;
     SQLQuery sqlQuery;
+    String message;
 
     //TODO VALIDATOR NE RADI ZA PODUPIT, TO PROMENI
     public Validator(SQLQuery sqlQuery) {
@@ -27,8 +32,10 @@ public class Validator {
         //Prolazi kroz svako pravilo
         for (Rule rule : rules) {
             //Proverava da li je pravilo zadovoljeno
-            if (!rule.ruleCheck(sqlQuery))
+            if (!rule.ruleCheck(sqlQuery)) {
+                message = rule.getMessage();
                 return false;
+            }
         }
 
         // Podupiti
@@ -54,8 +61,10 @@ public class Validator {
                 Validator validator = new Validator((SQLQuery) in.getPodupit());
 
                 //Ako podupit neprodje neki pravilo onda izlazi iz rekurzije i vraca false
-                if (!validator.checkRules())
+                if (!validator.checkRules()) {
+                    message = validator.getMessage();
                     return false;
+                }
             }
             //Samo jedan where postoji
             break;

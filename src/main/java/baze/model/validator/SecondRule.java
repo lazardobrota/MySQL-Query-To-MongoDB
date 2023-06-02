@@ -1,7 +1,5 @@
-package baze.gui.validator;
+package baze.model.validator;
 
-import baze.gui.view.MainFrame;
-import baze.model.implementation.AClause;
 import baze.model.implementation.GroupBy;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.Select;
@@ -35,12 +33,7 @@ public class SecondRule extends Rule{
         if (!agregation)
             return true;
 
-        message();
+        setMessage("Fali group by");
         return false;
-    }
-
-    @Override
-    public void message() {
-        MainFrame.getInstance().errorMessage("Fali group by");
     }
 }

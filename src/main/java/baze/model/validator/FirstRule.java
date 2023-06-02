@@ -1,7 +1,5 @@
-package baze.gui.validator;
+package baze.model.validator;
 
-import baze.gui.view.MainFrame;
-import baze.model.implementation.AClause;
 import baze.model.implementation.From;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.Select;
@@ -27,12 +25,7 @@ public class FirstRule extends Rule{
         }
 
         //Ako je dovde dosao znaci da ne postoje select i from
-        message();
+        setMessage("Fali Select ili From");
         return false;
-    }
-
-    @Override
-    public void message() {
-        MainFrame.getInstance().errorMessage("Fali Select ili From");
     }
 }
