@@ -1,6 +1,7 @@
 package baze.model.implementation;
 
 import baze.model.factory.oprt.FactoryUtils;
+import baze.model.implementation.operators.ColumnString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +9,10 @@ import java.util.Objects;
 
 public class Select extends Clause{
 
-    private List<String> column;
     private boolean isDistinct;
 
     public Select() {
-        column = new ArrayList<>();
+
     }
 
     //Select: string reci, agregacije(min, max, avg)
@@ -40,19 +40,17 @@ public class Select extends Clause{
                 //Ako ima zagrade znaci da je on nekog operatora
                 if (arr[j].contains("(") && arr[j].contains(")"))
                     continue;
-                column.add(arr[j]);
+                getOperators().add(new ColumnString(arr[j]));
             }
             //Collections.addAll(column, arr); // dodaje sve u listu
         }
-        System.out.println("select: " + column);
-        System.out.println("operators: " + getOperators());
+        System.out.println("select: " + getOperators());
     }
 
     @Override
     public String toString() {
         return "Select{" +
-                "column=" + column +
-                ", operators=" + getOperators() +
+                "operators=" + getOperators() +
                 '}';
     }
 }

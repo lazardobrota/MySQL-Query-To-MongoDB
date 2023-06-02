@@ -1,6 +1,7 @@
 package baze.model.implementation;
 
 import baze.model.factory.oprt.FactoryUtils;
+import baze.model.implementation.operators.ColumnString;
 import baze.model.implementation.operators.On;
 import baze.model.implementation.operators.Oprt;
 
@@ -8,11 +9,9 @@ import java.util.*;
 
 public class From extends Clause {
 
-    // Uradjeno kao lista da bi mogao da razlikujem kada postoji string i kada ne
-    List<String> column; // ako nema operatora to znaci da ima samo jedan string koju cuva
     // Moze da ima join
     public From() {
-        column = new ArrayList<>();
+
     }
 
     @Override
@@ -42,16 +41,14 @@ public class From extends Clause {
 
         //Ako je operator prazan znaci da nema operatora i da se samo jedna kolona iz tabele koristi
         if (this.getOperators().isEmpty())
-            column.add(lines[l + 1]); // upisuje se naziv te kolone
-        System.out.println("From: " + column);
-        System.out.println("Operators: " + this.getOperators());
+            this.getOperators().add(new ColumnString(lines[l + 1])); // upisuje se naziv te kolone
+        System.out.println("From: " + this.getOperators());
     }
 
     @Override
     public String toString() {
         return "From{" +
-                "column=" + column +
-                ", operators=" + getOperators() +
+                "operators=" + getOperators() +
                 '}';
     }
 }
