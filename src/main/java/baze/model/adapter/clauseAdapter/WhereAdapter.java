@@ -1,6 +1,7 @@
 package baze.model.adapter.clauseAdapter;
 
 import baze.model.adapter.ClauseAdapter;
+import baze.model.implementation.Clause;
 import baze.model.implementation.Where;
 
 import java.util.List;
@@ -8,9 +9,8 @@ import java.util.List;
 public class WhereAdapter extends ClauseAdapter {
 
 
-    public WhereAdapter(Where where) {
-        clause = where;
-
+    public WhereAdapter(Clause clause) {
+        super(clause);
     }
 
     @Override
