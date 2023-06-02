@@ -217,6 +217,104 @@ public class ClauseAdapter implements Adapter{
             str = "$min: \"" + oprt.getVariable() +"\"";
             return str;
         }
+        if(oprt instanceof Equals){
+            // sastavljanje stringa za =
+            String left, right;
+            left =oprt.getVariable()+"\"";
+            try {
+                Integer.parseInt(oprt.getVariable());
+                left = "\""+left;
+            }catch (NumberFormatException nfe){
+                left  = "\"$"+left;
+            }
+
+            if(oprt.getAgregation()!=null){
+                right = stringConverter(oprt.getAgregation());
+            }else{
+                right =oprt.getColumn()+"\"";
+                try {
+                    Integer.parseInt(oprt.getColumn());
+                    right = "\""+right;
+                }catch (NumberFormatException nfe){
+                    right  = "\"$"+right;
+                }
+                String temp = right;
+                right = left;
+                left = temp;
+            }
+            str = "$eq: [ " + left+", "+right +" ]";
+            return str;
+        }
+        if(oprt instanceof GreaterThan){
+            // sastavljanje stringa za >/>=
+            String left, right;
+            left =oprt.getVariable()+"\"";
+            try {
+                Integer.parseInt(oprt.getVariable());
+                left = "\""+left;
+            }catch (NumberFormatException nfe){
+                left  = "\"$"+left;
+            }
+
+            if(oprt.getAgregation()!=null){
+                right = stringConverter(oprt.getAgregation());
+            }else{
+                right =oprt.getColumn()+"\"";
+                try {
+                    Integer.parseInt(oprt.getColumn());
+                    right = "\""+right;
+                }catch (NumberFormatException nfe){
+                    right  = "\"$"+right;
+                }
+                String temp = right;
+                right = left;
+                left = temp;
+            }
+            str = "$gt";
+            if(((GreaterThan) oprt).isEqual())str+="e";
+            str += " [ " + left+", "+right +" ]";
+            return str;
+        }
+        if(oprt instanceof LowerThan){
+            // sastavljanje stringa za </<=
+            String left, right;
+            left =oprt.getVariable()+"\"";
+            try {
+                Integer.parseInt(oprt.getVariable());
+                left = "\""+left;
+            }catch (NumberFormatException nfe){
+                left  = "\"$"+left;
+            }
+
+            if(oprt.getAgregation()!=null){
+                right = stringConverter(oprt.getAgregation());
+            }else{
+                right =oprt.getColumn()+"\"";
+                try {
+                    Integer.parseInt(oprt.getColumn());
+                    right = "\""+right;
+                }catch (NumberFormatException nfe){
+                    right  = "\"$"+right;
+                }
+                String temp = right;
+                right = left;
+                left = temp;
+            }
+            str = "$lt";
+            if(((LowerThan) oprt).isEqual())str+="e";
+            str += " [ " + left+", "+right +" ]";
+            return str;
+        }
+        if(oprt instanceof In){
+            if(((In) oprt).getPodupit() != null){
+                podupitAdapter = (ClauseAdapter) AdapterFactoryUtils.getFactory(((In) oprt).getPodupit()).createAdapter(((In) oprt).getPodupit());
+                podupitAdapter.fillOutList();
+
+            }
+            // sastavljanje stringa za in
+            str = "$avg: [ \"" + oprt.getVariable() +"\" ]";
+            return str;
+        }
         str = "\""+((ColumnString)oprt).getColumnName()+"\"";
         return str;
     }
