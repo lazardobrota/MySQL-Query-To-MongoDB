@@ -19,6 +19,12 @@ public class ClauseAdapter implements Adapter{
 
     }
 
+    @Override
+    public String toString() {
+        return "ClauseAdapter{" +
+                "adaptedOprt=" + adaptedOprt +
+                '}';
+    }
 
     public void fillOutList(){
         Oprt oprt;
@@ -27,7 +33,7 @@ public class ClauseAdapter implements Adapter{
         for(int i = 0; i < clause.getOperators().size(); i++){
             oprt = clause.getOperators().get(i);
 
-            if(oprt instanceof Avg){
+            /*if(oprt instanceof Avg){
                 // sastavljanje stringa za avg
                 str = "$avg: \"" + oprt.getVariable() +"\"";
                 adaptedOprt.add(str);
@@ -155,7 +161,7 @@ public class ClauseAdapter implements Adapter{
                 adaptedOprt.add(str);
                 str = "";
                 continue;
-            }
+            }*/
             if(oprt instanceof Like){
                 // TODO: 02/06/2023 provaliti kako funkcionise like u sql-u i u monguDB-u
                 // sastavljanje stringa za like
@@ -199,10 +205,7 @@ public class ClauseAdapter implements Adapter{
                 continue;
 
             }
-            // sastavljanje stringa za za obican string
-            str = "\""+((ColumnString)oprt).getColumnName()+"\"";
-            adaptedOprt.add(str);
-            str = "";
+            adaptedOprt.add(stringConverter(oprt));
         }
     }
     public String stringConverter(Oprt oprt){
@@ -224,23 +227,24 @@ public class ClauseAdapter implements Adapter{
             // sastavljanje stringa za =
             String left, right;
             left =oprt.getVariable()+"\"";
-            try {
+            try {//proverava da li je oprt.variable string ili broj
                 Integer.parseInt(oprt.getVariable());
                 left = "\""+left;
             }catch (NumberFormatException nfe){
                 left  = "\"$"+left;
             }
 
-            if(oprt.getAgregation()!=null){
+            if(oprt.getAgregation()!=null){//proverava da li postoji podoperacija
                 right = stringConverter(oprt.getAgregation());
-            }else{
+            }else{//u suprotnom se ponasa normalno
                 right =oprt.getColumn()+"\"";
-                try {
+                try {//proverava da li je oprt.column string ili broj
                     Integer.parseInt(oprt.getColumn());
                     right = "\""+right;
                 }catch (NumberFormatException nfe){
                     right  = "\"$"+right;
                 }
+                //ovde obrce redosled stringova kako bi odrzao validnost upita
                 String temp = right;
                 right = left;
                 left = temp;
@@ -252,28 +256,29 @@ public class ClauseAdapter implements Adapter{
             // sastavljanje stringa za >/>=
             String left, right;
             left =oprt.getVariable()+"\"";
-            try {
+            try {//proverava da li je oprt.variable string ili broj
                 Integer.parseInt(oprt.getVariable());
                 left = "\""+left;
             }catch (NumberFormatException nfe){
                 left  = "\"$"+left;
             }
 
-            if(oprt.getAgregation()!=null){
+            if(oprt.getAgregation()!=null){//proverava da li postoji podoperacija
                 right = stringConverter(oprt.getAgregation());
-            }else{
+            }else{//u suprotnom se ponasa normalno
                 right =oprt.getColumn()+"\"";
-                try {
+                try {//proverava da li je oprt.column string ili broj
                     Integer.parseInt(oprt.getColumn());
                     right = "\""+right;
                 }catch (NumberFormatException nfe){
                     right  = "\"$"+right;
                 }
+                //ovde obrce redosled stringova kako bi odrzao validnost upita
                 String temp = right;
                 right = left;
                 left = temp;
             }
-            str = "$gt";
+            str = "$gt";//provera da li je u pitanju >= ili >
             if(((GreaterThan) oprt).isEqual())str+="e";
             str += " [ " + left+", "+right +" ]";
             return str;
@@ -318,6 +323,8 @@ public class ClauseAdapter implements Adapter{
             str = "$avg: [ \"" + oprt.getVariable() +"\" ]";
             return str;
         }
+        if(oprt == null) return "";
+
         str = "\""+((ColumnString)oprt).getColumnName()+"\"";
         return str;
     }
