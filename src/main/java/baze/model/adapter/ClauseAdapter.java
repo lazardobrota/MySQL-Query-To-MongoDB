@@ -19,31 +19,31 @@ public class ClauseAdapter implements Adapter{
 
 
     public void fillOutList(){
-        Oprt o;
+        Oprt oprt;
         String str;
         for(int i = 0; i < clause.getOperators().size(); i++){
-            o = clause.getOperators().get(i);
+            oprt = clause.getOperators().get(i);
 
-            if(o instanceof Avg){
-                str = "$avg: <" + o.getVariable() +">";
+            if(oprt instanceof Avg){
+                str = "$avg: <" + oprt.getVariable() +">";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
-            if(o instanceof Max){
-                str = "$max: <" + o.getVariable() +">";
+            if(oprt instanceof Max){
+                str = "$max: <" + oprt.getVariable() +">";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
-            if(o instanceof Min){
-                str = "$min: <" + o.getVariable() +">";
+            if(oprt instanceof Min){
+                str = "$min: <" + oprt.getVariable() +">";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
-            if(o instanceof Equals){
-                str = "$max: <" + o.getVariable() +">";
+            if(oprt instanceof Equals){
+                str = "$max: <" + oprt.getVariable() +">";
                 adaptedOprt.add(str);
                 str = "";
                 continue;

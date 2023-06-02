@@ -27,5 +27,13 @@
             <version>1.18.26</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.12.13</version>
+        </dependency>
+        
     </dependencies>
+
 </project>
