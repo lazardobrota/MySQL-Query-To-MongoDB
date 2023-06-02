@@ -1,7 +1,11 @@
 package baze.model.implementation.operators;
 
 import baze.model.factory.oprt.FactoryUtils;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class LowerThan extends Oprt {
     // uzgled u okviru unosa: nesto < nesto / nesto <= nesto
     private boolean equal; // da li je ovo <= ili <
