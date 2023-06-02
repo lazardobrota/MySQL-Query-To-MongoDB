@@ -13,8 +13,4 @@ public class WhereAdapter extends ClauseAdapter {
         super(clause);
     }
 
-    @Override
-    public List<String> getOperations() {
-        return null;
-    }
 }

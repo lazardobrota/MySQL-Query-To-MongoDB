@@ -17,23 +17,4 @@ public class SelectAdapter extends ClauseAdapter {
         super(clause);
     }
 
-    @Override
-    public String toString() {
-        List<String> oprtAdapters = getOperations();
-
-
-        return "SelectAdapter{" +
-                "select=" + clause +
-                '}';
-    }
-
-    @Override
-    public List<String> getOperations() {
-        List<String> oprtAdapters = new ArrayList<>();
-
-        for(int i = 0; i<clause.getOperators().size(); i++){
-            Object o = clause.getOperators().get(i);
-        }
-        return oprtAdapters;
-    }
 }
