@@ -1,5 +1,6 @@
 package baze.model.adapter;
 
+import baze.model.factory.adapter.AdapterFactoryUtils;
 import baze.model.implementation.Clause;
 import baze.model.implementation.operators.*;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class ClauseAdapter implements Adapter{
     protected Clause clause;
+    protected  ClauseAdapter podupitAdapter;
     protected List<String> adaptedOprt;
 
     public ClauseAdapter(Clause clause) {
@@ -26,24 +28,28 @@ public class ClauseAdapter implements Adapter{
             oprt = clause.getOperators().get(i);
 
             if(oprt instanceof Avg){
+                // sastavljanje stringa za avg
                 str = "$avg: \"" + oprt.getVariable() +"\"";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof Max){
+                // sastavljanje stringa za max
                 str = "$max: \"" + oprt.getVariable() +"\"";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof Min){
+                // sastavljanje stringa za min
                 str = "$min: \"" + oprt.getVariable() +"\"";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof Equals){
+                // sastavljanje stringa za =
                 String left, right;
                 left =oprt.getVariable()+"\"";
                 try {
@@ -63,6 +69,9 @@ public class ClauseAdapter implements Adapter{
                     }catch (NumberFormatException nfe){
                         right  = "\"$"+right;
                     }
+                    String temp = right;
+                    right = left;
+                    left = temp;
                 }
                 str = "$eq: [ " + left+", "+right +" ]";
                 adaptedOprt.add(str);
@@ -70,6 +79,7 @@ public class ClauseAdapter implements Adapter{
                 continue;
             }
             if(oprt instanceof GreaterThan){
+                // sastavljanje stringa za >/>=
                 String left, right;
                 left =oprt.getVariable()+"\"";
                 try {
@@ -89,15 +99,19 @@ public class ClauseAdapter implements Adapter{
                     }catch (NumberFormatException nfe){
                         right  = "\"$"+right;
                     }
+                    String temp = right;
+                    right = left;
+                    left = temp;
                 }
                 str = "$gt";
                 if(((GreaterThan) oprt).isEqual())str+="e";
-                str += "[ " + left+", "+right +" ]";
+                str += " [ " + left+", "+right +" ]";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof LowerThan){
+                // sastavljanje stringa za </<=
                 String left, right;
                 left =oprt.getVariable()+"\"";
                 try {
@@ -117,24 +131,36 @@ public class ClauseAdapter implements Adapter{
                     }catch (NumberFormatException nfe){
                         right  = "\"$"+right;
                     }
+                    String temp = right;
+                    right = left;
+                    left = temp;
                 }
                 str = "$lt";
                 if(((LowerThan) oprt).isEqual())str+="e";
-                str += "[ " + left+", "+right +" ]";
+                str += " [ " + left+", "+right +" ]";
                 adaptedOprt.add(str);
                 str = "";
+                continue;
             }
             if(oprt instanceof In){
+                if(((In) oprt).getPodupit() != null){
+                    podupitAdapter = (ClauseAdapter) AdapterFactoryUtils.getFactory(((In) oprt).getPodupit()).createAdapter(((In) oprt).getPodupit());
+                    podupitAdapter.fillOutList();
+
+                }
+                // sastavljanje stringa za in
                 str = "$avg: [ \"" + oprt.getVariable() +"\" ]";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
-            if(oprt instanceof Like){// TODO: 02/06/2023 provaliti kako funkcionise like u sql-u i u monguDB-u 
-
+            if(oprt instanceof Like){
+                // TODO: 02/06/2023 provaliti kako funkcionise like u sql-u i u monguDB-u
+                // sastavljanje stringa za like
                 continue;
             }
             if(oprt instanceof And){
+                // sastavljanje stringa za and
                 str = "$and [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
@@ -152,6 +178,7 @@ public class ClauseAdapter implements Adapter{
                 continue;
             }
             if(oprt instanceof Or){
+                // sastavljanje stringa za or
                 str = "$or [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
@@ -169,13 +196,15 @@ public class ClauseAdapter implements Adapter{
                 continue;
 
             }
+            // sastavljanje stringa za za obican string
             str = "\""+((ColumnString)oprt).getColumnName()+"\"";
             adaptedOprt.add(str);
             str = "";
         }
     }
     public String stringConverter(Oprt oprt){
-            String str;
+        //pomocna funkcija za pripremu String-ova za podupite
+        String str;
         if(oprt instanceof Avg){
             str = "$avg: \"" + oprt.getVariable() +"\"";
             return str;
