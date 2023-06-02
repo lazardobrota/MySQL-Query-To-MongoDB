@@ -52,23 +52,24 @@ public class ClauseAdapter implements Adapter{
                 // sastavljanje stringa za =
                 String left, right;
                 left =oprt.getVariable()+"\"";
-                try {
+                try {//proverava da li je oprt.variable string ili broj
                     Integer.parseInt(oprt.getVariable());
                     left = "\""+left;
                 }catch (NumberFormatException nfe){
                     left  = "\"$"+left;
                 }
 
-                if(oprt.getAgregation()!=null){
+                if(oprt.getAgregation()!=null){//proverava da li postoji podoperacija
                     right = stringConverter(oprt.getAgregation());
-                }else{
+                }else{//u suprotnom se ponasa normalno
                     right =oprt.getColumn()+"\"";
-                    try {
+                    try {//proverava da li je oprt.column string ili broj
                         Integer.parseInt(oprt.getColumn());
                         right = "\""+right;
                     }catch (NumberFormatException nfe){
                         right  = "\"$"+right;
                     }
+                    //ovde obrce redosled stringova kako bi odrzao validnost upita
                     String temp = right;
                     right = left;
                     left = temp;
@@ -82,28 +83,29 @@ public class ClauseAdapter implements Adapter{
                 // sastavljanje stringa za >/>=
                 String left, right;
                 left =oprt.getVariable()+"\"";
-                try {
+                try {//proverava da li je oprt.variable string ili broj
                     Integer.parseInt(oprt.getVariable());
                     left = "\""+left;
                 }catch (NumberFormatException nfe){
                     left  = "\"$"+left;
                 }
 
-                if(oprt.getAgregation()!=null){
+                if(oprt.getAgregation()!=null){//proverava da li postoji podoperacija
                     right = stringConverter(oprt.getAgregation());
-                }else{
+                }else{//u suprotnom se ponasa normalno
                     right =oprt.getColumn()+"\"";
-                    try {
+                    try {//proverava da li je oprt.column string ili broj
                         Integer.parseInt(oprt.getColumn());
                         right = "\""+right;
                     }catch (NumberFormatException nfe){
                         right  = "\"$"+right;
                     }
+                    //ovde obrce redosled stringova kako bi odrzao validnost upita
                     String temp = right;
                     right = left;
                     left = temp;
                 }
-                str = "$gt";
+                str = "$gt";//provera da li je u pitanju >= ili >
                 if(((GreaterThan) oprt).isEqual())str+="e";
                 str += " [ " + left+", "+right +" ]";
                 adaptedOprt.add(str);
@@ -166,11 +168,12 @@ public class ClauseAdapter implements Adapter{
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
                 str +=", "+this.stringConverter(clause.getOperators().get(i));
-                
-                if(clause.getOperators().get(i+1) instanceof And){
-                    i+=2;
-                    str +=", "+this.stringConverter(clause.getOperators().get(i));
-                }
+
+                if(i<=clause.getOperators().size()-2)
+                    if(clause.getOperators().get(i+1) instanceof And){
+                        i+=2;
+                        str +=", "+this.stringConverter(clause.getOperators().get(i));
+                    }
                 
                 str += " ]";
                 adaptedOprt.add(str);
@@ -184,11 +187,11 @@ public class ClauseAdapter implements Adapter{
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
                 str +=", "+this.stringConverter(clause.getOperators().get(i));
-
-                if(clause.getOperators().get(i+1) instanceof Or){
-                    i+=2;
-                    str +=", "+this.stringConverter(clause.getOperators().get(i));
-                }
+                if(i<=clause.getOperators().size()-2)
+                    if(clause.getOperators().get(i+1) instanceof Or){
+                        i+=2;
+                        str +=", "+this.stringConverter(clause.getOperators().get(i));
+                    }
 
                 str += " ]";
                 adaptedOprt.add(str);
