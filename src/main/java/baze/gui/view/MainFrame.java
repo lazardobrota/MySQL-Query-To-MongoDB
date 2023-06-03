@@ -1,6 +1,7 @@
 package baze.gui.view;
 
 
+import baze.AppCore;
 import baze.gui.controller.ReadTextAction;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,8 @@ public class MainFrame extends JFrame{
     private JButton btnRun;
     private JTextArea textArea;
     private JTable table;
+
+    private AppCore appCore;
 
     private MainFrame() {
 
@@ -60,5 +63,10 @@ public class MainFrame extends JFrame{
             instance.init();
         }
         return instance;
+    }
+
+    public void setAppCore(AppCore appCore) {
+        this.appCore = appCore;
+        this.table.setModel(appCore.getTableModel());
     }
 }
