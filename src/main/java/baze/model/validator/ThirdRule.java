@@ -3,6 +3,7 @@ package baze.model.validator;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.Where;
 import baze.model.implementation.operators.*;
+import baze.model.implementation.operators.agregation.Agregation;
 
 public class ThirdRule extends Rule{
     public ThirdRule(String name) {
@@ -24,8 +25,10 @@ public class ThirdRule extends Rule{
             for (int j = 0; j < where.getOperators().size(); j++) {
                 Oprt oprt = where.getOperators().get(j);
 
+                //U where oprt sam po sebi ne moze da bude agregacija
+                
                 //Pronasao je agregaciju
-                if (oprt.getValue() == null) {
+                if (oprt.getLeft() instanceof Agregation || oprt.getRight() instanceof Agregation) {
                     agregation = true;
                     break;
                 }

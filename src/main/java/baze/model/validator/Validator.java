@@ -57,6 +57,10 @@ public class Validator {
                     continue;
 
                 In in = (In) oprt;
+
+                // Ovaj in ne sarzi podupit
+                if (in.getPodupit() == null)
+                    continue;
                 //Uzima podupit od In
                 Validator validator = new Validator((SQLQuery) in.getPodupit());
 
