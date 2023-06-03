@@ -1,9 +1,9 @@
 package baze.model.implementation;
 
+import baze.model.factory.oprt.ColumnStringFactory;
 import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.operators.*;
 
-import java.util.Objects;
 
 public class Where extends Clause{
 
@@ -19,12 +19,12 @@ public class Where extends Clause{
         // FactoryUtils.getFactory(lines[l]).getOprt(lines[l]);
 
         for (int i = l; i < r; i++) {
-            //Kada rec nije null to znaci da je operator neki
-            if (FactoryUtils.getFactory(lines[i]) == null)
+            //Kada rec nije obican string to znaci da je operator neki
+            if (FactoryUtils.getFactory(lines[i]) instanceof ColumnStringFactory)
                 continue;
 
             // Uzima operator
-            Oprt operator = Objects.requireNonNull(FactoryUtils.getFactory(lines[i])).getOprt(lines[i]);
+            Oprt operator = FactoryUtils.getFactory(lines[i]).getOprt(lines[i]);
 
             // Preskace ako je agregacija
             if (operator instanceof Max || operator instanceof Avg || operator instanceof Min)

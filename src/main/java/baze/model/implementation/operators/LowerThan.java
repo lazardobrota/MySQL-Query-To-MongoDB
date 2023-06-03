@@ -1,6 +1,5 @@
 package baze.model.implementation.operators;
 
-import baze.model.factory.oprt.FactoryUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,19 +18,15 @@ public class LowerThan extends Oprt {
     @Override
     public void doOperation(String[] line, int c) {
         super.doOperation(line, c);
-        //Oprt o = FactoryUtils.getFactory(this.variable).createOprt(variable);//provera za slucaj da je drugi atribut neka Oprt
-        //if(o!=null){
-
-        //}
     }
 
     @Override
     public String toString() {
         return "LowerThan{" +
                 "equal=" + equal +
-                ", column='" + column + '\'' +
-                ", variable='" + variable + '\'' +
-                ", agregation=" + agregation +
+                ", left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

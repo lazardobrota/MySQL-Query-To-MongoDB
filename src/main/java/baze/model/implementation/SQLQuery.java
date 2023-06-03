@@ -77,7 +77,7 @@ public class SQLQuery implements AClause{
                     Clause where = (Clause) claues.get(claues.size() - 1); // uzima where clause
                     for (int j = 0; j < where.getOperators().size(); j++) {
                         if (where.getOperators().get(j) instanceof In) {
-                            In in = (In) where.getOperators().get(where.getOperators().size() - 1); // sigurno je poslednji in ako postoji podupit
+                            In in = (In) where.getOperators().get(j); // sigurno je poslednji in ako postoji podupit
                             if (in.getPodupit() != null)
                                 continue;
                             in.setPodupit(podupit);

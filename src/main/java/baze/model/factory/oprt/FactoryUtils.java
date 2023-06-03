@@ -17,6 +17,7 @@ public class FactoryUtils {
     private static final InFactory inFactory = new InFactory();
     private static final CountFactory countFactory = new CountFactory();
     private static final RownumFactory rownumFactory = new RownumFactory();
+    private static final ColumnStringFactory columnStringFactory = new ColumnStringFactory();
 
     public static OprtFactory getFactory(String operation) {
         if(operation.matches("rownum"))
@@ -50,6 +51,6 @@ public class FactoryUtils {
         if (operation.equals("in"))
             return inFactory;
 
-        return null;
+        return columnStringFactory; // Kolumn String da se gleda kao null
     }
 }

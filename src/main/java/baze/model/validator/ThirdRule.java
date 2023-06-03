@@ -25,7 +25,7 @@ public class ThirdRule extends Rule{
                 Oprt oprt = where.getOperators().get(j);
 
                 //Pronasao je agregaciju
-                if (oprt.getAgregation() != null) {
+                if (oprt.getValue() == null) {
                     agregation = true;
                     break;
                 }

@@ -1,12 +1,11 @@
 package baze.model.implementation.operators;
 
-import baze.model.factory.oprt.FactoryUtils;
-
 public class Equals extends Oprt{
     // uzgled u okviru unosa: nesto = nesto
     public Equals() {
     }
 
+    //Poziva doOperation od roditelja
     @Override
     public void doOperation(String[] line, int c) {
         super.doOperation(line, c);
@@ -17,15 +16,12 @@ public class Equals extends Oprt{
 
     }
 
-    //Poziva doOperation od roditelja
-
-
     @Override
     public String toString() {
         return "Equals{" +
-                "column='" + column + '\'' +
-                ", variable='" + variable + '\'' +
-                ", agregation=" + agregation +
+                "left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

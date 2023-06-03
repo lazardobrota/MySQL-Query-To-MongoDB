@@ -11,6 +11,10 @@ public class Or extends CombineOprt{
     }
 
     @Override
+    public void doOperation(String[] line, int c) {
+    }
+
+    @Override
     public String toString() {
         return "Or{" +
                 "left=" + left +

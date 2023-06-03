@@ -15,8 +15,9 @@ public class Join extends Oprt{
     @Override
     public String toString() {
         return "Join{" +
-                "column='" + column + '\'' +
-                ", variable='" + variable + '\'' +
+                "left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

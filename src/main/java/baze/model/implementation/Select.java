@@ -16,7 +16,6 @@ public class Select extends Clause{
     }
 
     //Select: string reci, agregacije(min, max, avg)
-    //TODO IMA BAG AKO SU SPOJENI SVI DA CE DA KRESUJE AKO SU AVG, MAX, MIN TU, STVARNO ME MRZI VISE DA POPRAVLJAM TO
     @Override
     public void fillOut(String[] lines, int l, int r) {
         //Prolazi kroz sve space-ove za koje znaju da pripadaju select
@@ -28,9 +27,9 @@ public class Select extends Clause{
             }
             String[] arr = lines[i].split(",");// deli po zarecu
 
-            //Dodaje ih sve listu koji nemaju min, max, avg
+            //Dodaje ih sve listu koji nemaju min, max, avg, count
             for (int j = 0; j < arr.length; j++) {
-                if (arr[j].contains("max") || arr[j].contains("min") || arr[j].contains("avg")) {
+                if (arr[j].contains("max") || arr[j].contains("min") || arr[j].contains("avg") || arr[j].contains("count")) {
                     getOperators().add(Objects.requireNonNull(FactoryUtils.getFactory(arr[j])).getOprt(arr[j])); // pravi novi max ili avg ili min operator
 
                     // uzima lines , i + j koji govori dokle je u lines stao, na primer lines[2] je max i u arr kada se splituje to ce biti na 0 mestu, pa 2 + 0 = 2
@@ -40,7 +39,7 @@ public class Select extends Clause{
                 //Ako ima zagrade znaci da je on nekog operatora
                 if (arr[j].contains("(") && arr[j].contains(")"))
                     continue;
-                getOperators().add(new ColumnString(arr[j]));
+                getOperators().add(FactoryUtils.getFactory(arr[j]).getOprt(arr[j]));
             }
             //Collections.addAll(column, arr); // dodaje sve u listu
         }

@@ -9,9 +9,10 @@ import java.util.Objects;
 @Getter
 @Setter
 public abstract class Oprt {
-    protected String column; // levo, ono sto uzima iz baze podataka
-    protected String variable; // desno, uslov sta uzima iz baze
-    protected Oprt agregation;
+    protected Oprt left; // levo, ono sto uzima iz baze podataka
+    protected Oprt right; // desno, uslov sta uzima iz baze
+    protected String value;
+    //protected Oprt agregation;
 
     public Oprt() {
     }
@@ -22,6 +23,12 @@ public abstract class Oprt {
         }
         String x = line[c-1], y = line[c+1];
 
+        left = FactoryUtils.getFactory(x).getOprt(x);
+        left.doOperation(line, c - 1);
+
+        right = FactoryUtils.getFactory(y).getOprt(y);
+        right.doOperation(line, c + 1);
+        /*
         // Za x ako je neka operacija da operaciju sacuva
         if (FactoryUtils.getFactory(x) != null) {
             agregation = Objects.requireNonNull(FactoryUtils.getFactory(x)).getOprt(x);
@@ -29,7 +36,7 @@ public abstract class Oprt {
         }
         else { // ako nije operacija da sacuva string
             if(x.contains("("))x = x.substring(1);
-            this.column = x;
+            this.left = x;
         }
 
         // Za y ako je neka operacija da operaciju sacuva
@@ -39,8 +46,9 @@ public abstract class Oprt {
         }
         else { // ako nije operacija da sacuva string
             if(y.contains(")"))y = y.substring(0,y.length()-1);
-            this.variable = y;
+            this.right = y;
         }
+         */
     }
 
 }

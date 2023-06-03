@@ -1,5 +1,6 @@
 package baze.model.implementation;
 
+import baze.model.factory.oprt.ColumnStringFactory;
 import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.operators.*;
 
@@ -13,8 +14,8 @@ public class Having extends Clause{
     @Override
     public void fillOut(String[] lines, int l, int r) {
         for (int i = l; i < r; i++) {
-            //Kada rec nije null to znaci da je operator neki
-            if (FactoryUtils.getFactory(lines[i]) == null)
+            //Kada rec nije obican string to znaci da je operator neki
+            if (FactoryUtils.getFactory(lines[i]) instanceof ColumnStringFactory)
                 continue;
 
             // Uzima operator

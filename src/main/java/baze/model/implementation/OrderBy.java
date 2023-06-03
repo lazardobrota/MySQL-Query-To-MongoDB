@@ -1,19 +1,28 @@
 package baze.model.implementation;
 
 import baze.model.factory.oprt.FactoryUtils;
-import baze.model.implementation.operators.Desc;
-
-import java.util.Objects;
 
 public class OrderBy extends Clause{
+    private int rastuce = 1; // sortira se rastuce
+
+
     @Override
     public void fillOut(String[] lines, int l, int r) {
-        Desc desc = new Desc(false); // rastuce je
-        desc.setColumn(lines[l + 2]); // uzima sledeci string posle order by
-        if (lines[r - 1].equals("desc"))
-            desc.setDesc(true); // opadajuce
 
-        this.getOperators().add(desc);
-        System.out.println("OrderBy: " + this.getOperators());
+        //Moze da postji samo jedan string posle za kolonu a moze i drugi string koji govori da je opadajuce
+        for (int i = l + 2; i  < r; i++) {
+
+            //Dosao je do kraja i postoji desc sto znaci da se sortira opadajuce
+            if (lines[i].equals("desc")) {
+                rastuce = -1;
+                continue;
+            }
+
+            //Upisuje sve sto soritra
+            this.getOperators().add(FactoryUtils.getFactory(lines[i]).getOprt(lines[i]));
+        }
+
+        System.out.println("OrderBy: " + rastuce + " operatori: " + this.getOperators());
     }
+
 }

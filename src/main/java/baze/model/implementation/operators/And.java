@@ -16,10 +16,16 @@ public class And extends CombineOprt{
     }
 
     @Override
+    public void doOperation(String[] line, int c) {
+
+    }
+
+    @Override
     public String toString() {
         return "And{" +
                 "left=" + left +
                 ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

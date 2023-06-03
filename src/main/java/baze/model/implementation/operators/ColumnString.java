@@ -8,10 +8,10 @@ import lombok.Setter;
 
 //Ovo je samo obican string jer ne moze da se spoji lista stringova i operatora
 public class ColumnString extends Oprt{
-    private String columnName;
 
+    //TODO SAMO ColumnString koristi VALUE
     public ColumnString(String columnName) {
-        this.columnName = columnName;
+        this.value = columnName;
     }
 
     //Da mu do operation nista ne radi
@@ -23,7 +23,7 @@ public class ColumnString extends Oprt{
     @Override
     public String toString() {
         return "ColumnString{" +
-                "columnName='" + columnName + '\'' +
+                "value='" + value + '\'' +
                 '}';
     }
 }

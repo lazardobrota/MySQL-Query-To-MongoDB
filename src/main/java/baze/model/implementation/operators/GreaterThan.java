@@ -1,6 +1,5 @@
 package baze.model.implementation.operators;
 
-import baze.model.factory.oprt.FactoryUtils;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,9 +30,9 @@ public class GreaterThan extends Oprt {
     public String toString() {
         return "GreaterThan{" +
                 "equal=" + equal +
-                ", column='" + column + '\'' +
-                ", variable='" + variable + '\'' +
-                ", agregation=" + agregation +
+                ", left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

@@ -11,8 +11,9 @@ public class Like extends Oprt {
     @Override
     public String toString() {
         return "Like{" +
-                "column='" + column + '\'' +
-                ", variable='" + variable + '\'' +
+                "left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }

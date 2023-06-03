@@ -5,16 +5,28 @@ import baze.model.factory.oprt.FactoryUtils;
 public class Count extends Oprt{
 // uzgled u okviru unosa: count(oprt)
 
-    private Oprt operation;
     public Count() {
     }
 
     @Override
     public void doOperation(String[] line, int c) {
-        operation = FactoryUtils.getFactory(line[c]).createOprt(line[c].substring(1));
-        if(operation!=null){
-            return;
+        String value;
+        //Bez space
+        if(line[c].contains("(") && line[c].contains(")")){
+            value = line[c].substring(line[c].indexOf('(')+1, line[c].indexOf(')'));
+        }else{ // Sa space
+            value = line[c+1].substring(line[c+1].indexOf('(')+1, line[c+1].indexOf(')'));
         }
-        super.doOperation(line, c);
+
+        this.right = FactoryUtils.getFactory(value).getOprt(value); // Pravi ColumnString
+    }
+
+    @Override
+    public String toString() {
+        return "Count{" +
+                "left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
+                '}';
     }
 }

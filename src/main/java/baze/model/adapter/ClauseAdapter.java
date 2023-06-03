@@ -27,6 +27,7 @@ public class ClauseAdapter implements Adapter{
     }
 
     public void fillOutList(){
+        /*
         Oprt oprt;
         String str;
         // prolazi kroz listu operatora i u zavisnosti od njegove instance odgovarajuce ga konvertuje u String
@@ -193,6 +194,7 @@ public class ClauseAdapter implements Adapter{
 
         str = "\""+((ColumnString)oprt).getColumnName()+"\"";
         return str;
+         */
     }
 }
             /*if(oprt instanceof Avg){

@@ -1,15 +1,13 @@
 package baze.model.implementation;
 
+import baze.model.factory.oprt.FactoryUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class GroupBy extends Clause{
-    private List<String> columns;
 
-    public GroupBy() {
-        columns = new ArrayList<>();
-    }
 
     @Override
     public void fillOut(String[] lines, int l, int r) {
@@ -17,9 +15,9 @@ public class GroupBy extends Clause{
         for (int i = l + 2; i < r; i++) {
             //Ako treba da ukloni zares izmedju njih
             String[] arr = lines[i].split(",");// deli po zarecu al bice samo jedna rec u teksu, samo mi je lakse ovako da radim
-            columns.addAll(Arrays.asList(arr)); // stavlja tu jednu rec u listu
+            this.getOperators().add(FactoryUtils.getFactory(arr[0]).getOprt(arr[0]));
         }
 
-        System.out.println("GroupBy: " + columns);
+        System.out.println("GroupBy: " + this.getOperators());
     }
 }

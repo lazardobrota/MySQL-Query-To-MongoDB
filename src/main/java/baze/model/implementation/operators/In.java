@@ -1,13 +1,12 @@
 package baze.model.implementation.operators;
 
-import baze.model.factory.clause.FactoryUtilsClause;
 import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.AClause;
-import baze.model.implementation.Clause;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,13 +14,29 @@ import java.util.Objects;
 public class In extends Oprt{
 // izgled u okviru unosa: in (nesto)
 
+    //TODO Jedini IN ima promenljive unutar seebe
     private AClause podupit;
+    private List<ColumnString> columnStrings = new ArrayList<>();
 
     @Override
     public void doOperation(String[] line, int c) {
-        variable = line[c+1].substring(1,line[c+1].length()-1);
+        left = FactoryUtils.getFactory(line[c - 1]).getOprt(line[c - 1]);
 
-        //this.column = line[c - 1];
+        //Ako ima (select znaci da je podupit i lista je prazna
+        if (line[c + 1].equals("(select"))
+            return;
+
+        //Nema podupit
+        c++; // da preskoci in
+        //Do ne pronadjen ) za kraj skupa elemenata
+        String[] arr = line.clone();
+        arr[c] = arr[c].substring(1); // uklanja prvu zagradu
+        while (!arr[c].contains(")")) {
+            arr[c] = arr[c].substring(0, arr[c].length() - 1); // uklanja zarez
+            columnStrings.add((ColumnString) FactoryUtils.getFactory(arr[c]).getOprt(arr[c++]));
+        }
+        arr[c] = arr[c].substring(0, arr[c].length() - 1);
+        columnStrings.add((ColumnString) FactoryUtils.getFactory(arr[c]).getOprt(arr[c]));
     }
 
 
@@ -29,7 +44,10 @@ public class In extends Oprt{
     public String toString() {
         return "In{" +
                 "podupit=" + podupit +
-                ", column='" + column + '\'' +
+                ", columnStrings=" + columnStrings +
+                ", left=" + left +
+                ", right=" + right +
+                ", value='" + value + '\'' +
                 '}';
     }
 }
