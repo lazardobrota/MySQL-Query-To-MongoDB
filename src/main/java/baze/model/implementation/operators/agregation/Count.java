@@ -1,8 +1,8 @@
-package baze.model.implementation.operators;
+package baze.model.implementation.operators.agregation;
 
 import baze.model.factory.oprt.FactoryUtils;
 
-public class Count extends Oprt{
+public class Count extends Agregation{
 // uzgled u okviru unosa: count(oprt)
 
     public Count() {

@@ -1,6 +1,6 @@
 package baze.model.factory.oprt;
 
-import baze.model.implementation.operators.Count;
+import baze.model.implementation.operators.agregation.Count;
 import baze.model.implementation.operators.Oprt;
 
 public class CountFactory extends OprtFactory{

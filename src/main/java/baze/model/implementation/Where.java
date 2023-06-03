@@ -3,6 +3,10 @@ package baze.model.implementation;
 import baze.model.factory.oprt.ColumnStringFactory;
 import baze.model.factory.oprt.FactoryUtils;
 import baze.model.implementation.operators.*;
+import baze.model.implementation.operators.agregation.Agregation;
+import baze.model.implementation.operators.agregation.Avg;
+import baze.model.implementation.operators.agregation.Max;
+import baze.model.implementation.operators.agregation.Min;
 
 
 public class Where extends Clause{
@@ -27,7 +31,7 @@ public class Where extends Clause{
             Oprt operator = FactoryUtils.getFactory(lines[i]).getOprt(lines[i]);
 
             // Preskace ako je agregacija
-            if (operator instanceof Max || operator instanceof Avg || operator instanceof Min)
+            if (operator instanceof Agregation)
                 continue;
 
              //Ako nema last da je AND ili Or

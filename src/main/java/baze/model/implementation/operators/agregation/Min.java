@@ -1,8 +1,8 @@
-package baze.model.implementation.operators;
+package baze.model.implementation.operators.agregation;
 
 import baze.model.factory.oprt.FactoryUtils;
 
-public class Min extends Oprt{
+public class Min extends Agregation{
 // uzgled u okviru unosa: min(nesto) / min (nesto)
 
 

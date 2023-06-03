@@ -1,16 +1,10 @@
-package baze.model.implementation.operators;
+package baze.model.implementation.operators.agregation;
 
 import baze.model.factory.oprt.FactoryUtils;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-public class Avg extends Oprt {
-// uzgled u okviru unosa: avg(nesto) / avg (nesto)
+public class Max extends Agregation{
+// uzgled u okviru unosa: max(nesto) / max (nesto)
 
-    public Avg() {
-    }
 
     @Override
     public void doOperation(String[] line, int c) {
@@ -28,10 +22,8 @@ public class Avg extends Oprt {
 
     @Override
     public String toString() {
-        return "Avg{" +
-                "left=" + left +
-                ", right=" + right +
-                ", value='" + value + '\'' +
+        return "Max{" +
+                "right=" + right +
                 '}';
     }
 }
