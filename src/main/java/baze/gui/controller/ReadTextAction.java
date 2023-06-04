@@ -1,6 +1,7 @@
 package baze.gui.controller;
 
 import baze.model.adapter.ClauseAdapter;
+import baze.model.adapter.mapper.Mapper;
 import baze.model.factory.adapter.AdapterFactoryUtils;
 import baze.model.implementation.Clause;
 import baze.model.validator.Validator;
@@ -27,6 +28,8 @@ public class ReadTextAction extends AbstractAction {
             clauseAdapters.add((ClauseAdapter) AdapterFactoryUtils.getFactory(clause).getAdapter(clause));
         }
 
+        Mapper mapper = new Mapper(clauseAdapters);
+        mapper.combineClauses();
         System.out.println(clauseAdapters);
     }
 }
