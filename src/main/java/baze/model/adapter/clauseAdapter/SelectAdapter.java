@@ -18,14 +18,15 @@ public class SelectAdapter extends ClauseAdapter {
     @Override
     public String toString() {
         if(adaptedOprt.contains("\"*\""))return  "select{}";
-        String st = "{ ";
-        if(!adaptedOprt.contains("\"_id\""))st+="\"_id\": 0, ";
+        String str = "{ ";
+        if(!adaptedOprt.contains("\"_id\""))str+="\"_id\": 0, ";
         for(String oprt: adaptedOprt){
-            st+=oprt+": 1, ";
+            str+=oprt+": 1, ";
         }
-        st +="}";
+        str = str.substring(0, str.length() - 2); // uklanja zarez
+        str +=" }";
         return "select" +
-                st
+                str
                 ;
     }
 }

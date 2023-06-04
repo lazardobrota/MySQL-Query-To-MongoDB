@@ -8,6 +8,7 @@ import java.util.List;
 
 public class WhereAdapter extends ClauseAdapter {
 
+    //todo where ce mozda morati da menja kako radi
     public WhereAdapter() {
         super();
     }

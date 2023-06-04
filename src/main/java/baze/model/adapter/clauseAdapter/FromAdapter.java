@@ -15,6 +15,6 @@ public class FromAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        return "db."+this.adaptedOprt.get(0).substring(1,adaptedOprt.get(0).length()-1)+".find(";
+        return this.adaptedOprt.get(0).substring(1,adaptedOprt.get(0).length()-1);
     }
 }
