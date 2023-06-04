@@ -72,9 +72,9 @@ public class ClauseAdapter implements Adapter{
                         if(temp.charAt(temp.length()-1) == '%'){//pita da li sadrzi % na kraju
                             str+="^"+temp.substring(0,temp.length()-1)+"/i";;
                         }
-                        else str+=temp+"/i";
+                        else str=srediAtribut(oprt.getLeft())+": "+srediAtribut(oprt.getRight());
                     }
-                }else str+=temp+"/i";
+                }else str=srediAtribut(oprt.getLeft())+": "+srediAtribut(oprt.getRight());
                 adaptedOprt.add(str);
                 str = "";
                 continue;
@@ -125,15 +125,15 @@ public class ClauseAdapter implements Adapter{
         String str;
 
         if(oprt instanceof Avg){
-            str = "\"$avg\": " + srediAtribut(oprt.getRight());
+            str = "{ $avg: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Max){
-            str = "\"$max\": " + srediAtribut(oprt.getRight());
+            str = "{ $max: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Min){
-            str = "\"$min\": " + srediAtribut(oprt.getRight());
+            str = "{ $min: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Equals){
@@ -144,7 +144,7 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());
 
-            str = "\"$eq\": [ " + left +", "+ right +" ]";
+            str = "{ "+left + ": { $eq: " + right +" } }";
             return str;
         }
         if(oprt instanceof GreaterThan){
@@ -155,9 +155,9 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());//sredjuje desni atribut
 
-            str = "\"$gt";//provera da li je u pitanju >= ili >
+            str = "$gt";//provera da li je u pitanju >= ili >
             if(((GreaterThan) oprt).isEqual())str+="e";
-            str += "\": [ " + left+", "+right +" ]";
+            str += ": [ " + left+", "+right +" ]";
             return str;
         }
         if(oprt instanceof LowerThan){
@@ -168,13 +168,13 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());
 
-            str = "\"$lt";
+            str = "$lt";
             if(((LowerThan) oprt).isEqual())str+="e";
-            str += "\": [ " + left +", "+ right +" ]";
+            str += ": [ " + left +", "+ right +" ]";
             return str;
         }
         if(oprt instanceof In){
-            str = srediAtribut(oprt.getLeft()) + ": { \"$in\": [ "; // pocetni deo adaptiranog mongu koda
+            str = srediAtribut(oprt.getLeft()) + ": { $in: [ "; // pocetni deo adaptiranog mongu koda
             if(!((In) oprt).getColumnStrings().isEmpty()){//U slucaju da ne sadrzi podupit popunjava atribute i zatvara zagrade
                 for(int i = 0; i < ((In) oprt).getColumnStrings().size(); i++){
                     str += srediAtribut(((In) oprt).getColumnStrings().get(i));
