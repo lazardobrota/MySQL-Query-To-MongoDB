@@ -15,6 +15,10 @@ public class ClauseAdapter implements Adapter{
     protected  ClauseAdapter podupitAdapter;
     protected List<String> adaptedOprt;
 
+    public ClauseAdapter() {
+        adaptedOprt = new ArrayList<>();
+    }
+
     public ClauseAdapter(Clause clause) {
         this.clause = clause;
         this.adaptedOprt = new ArrayList<>();
@@ -25,7 +29,7 @@ public class ClauseAdapter implements Adapter{
     @Override
     public String toString() {
         return "ClauseAdapter{" +
-                "adaptedOprt=" + adaptedOprt +
+                 adaptedOprt +
                 '}';
     }
 
@@ -64,7 +68,7 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = "$and [ ";
+                str = "\"$and\": [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
@@ -83,7 +87,7 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof Or){
                 // sastavljanje stringa za or
-                str = "$or [ ";
+                str = "\"$or\": [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
@@ -107,15 +111,15 @@ public class ClauseAdapter implements Adapter{
         //pomocna funkcija za pripremu String-ova za podupite
         String str;
         if(oprt instanceof Avg){
-            str = "$avg: " + srediAtribut(oprt.getRight());
+            str = "\"$avg\": " + srediAtribut(oprt.getRight());
             return str;
         }
         if(oprt instanceof Max){
-            str = "$max: " + srediAtribut(oprt.getRight());
+            str = "\"$max\": " + srediAtribut(oprt.getRight());
             return str;
         }
         if(oprt instanceof Min){
-            str = "$min: " + srediAtribut(oprt.getRight());
+            str = "\"$min\": " + srediAtribut(oprt.getRight());
             return str;
         }
         if(oprt instanceof Equals){
@@ -126,7 +130,7 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());
 
-            str = "$eq: [ " + left +", "+ right +" ]";
+            str = "\"$eq\": [ " + left +", "+ right +" ]";
             return str;
         }
         if(oprt instanceof GreaterThan){
@@ -137,9 +141,9 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());//sredjuje desni atribut
 
-            str = "$gt";//provera da li je u pitanju >= ili >
+            str = "\"$gt";//provera da li je u pitanju >= ili >
             if(((GreaterThan) oprt).isEqual())str+="e";
-            str += ": [ " + left+", "+right +" ]";
+            str += "\": [ " + left+", "+right +" ]";
             return str;
         }
         if(oprt instanceof LowerThan){
@@ -150,13 +154,13 @@ public class ClauseAdapter implements Adapter{
 
             right = srediAtribut(oprt.getRight());
 
-            str = "$lt";
+            str = "\"$lt";
             if(((LowerThan) oprt).isEqual())str+="e";
-            str += ": [ " + left +", "+ right +" ]";
+            str += "\": [ " + left +", "+ right +" ]";
             return str;
         }
         if(oprt instanceof In){
-            str = srediAtribut(oprt.getLeft()) + ": { $in: [ "; // pocetni deo adaptiranog mongu koda
+            str = srediAtribut(oprt.getLeft()) + ": { \"$in\": [ "; // pocetni deo adaptiranog mongu koda
             if(!((In) oprt).getColumnStrings().isEmpty()){//U slucaju da ne sadrzi podupit popunjava atribute i zatvara zagrade
                 for(int i = 0; i < ((In) oprt).getColumnStrings().size(); i++){
                     str += srediAtribut(((In) oprt).getColumnStrings().get(i));

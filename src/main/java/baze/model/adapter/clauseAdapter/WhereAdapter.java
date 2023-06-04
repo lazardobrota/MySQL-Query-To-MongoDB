@@ -8,9 +8,17 @@ import java.util.List;
 
 public class WhereAdapter extends ClauseAdapter {
 
+    public WhereAdapter() {
+        super();
+    }
 
     public WhereAdapter(Clause clause) {
         super(clause);
     }
-
+    @Override
+    public String toString() {
+        return "where{" +
+                adaptedOprt +
+                '}';
+    }
 }
