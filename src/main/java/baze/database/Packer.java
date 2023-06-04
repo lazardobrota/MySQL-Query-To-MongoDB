@@ -23,7 +23,6 @@ public class Packer {
 
     public void translate() {
         String[] split = document.split(" ");
-
         for (int i = 0; i < split.length; i++) {
 
             //Preskace ako postoji { jer znaci da nije dosao unutrasnjih zagrada
@@ -32,19 +31,32 @@ public class Packer {
 
             //Pronasao je ime kolone
             if (split[i].contains("\":")) {
-                //1 - presko ", split[i].length()-2 - uklanja ":
-                String name = split[i].substring(1, split[i].length() - 2);
+                String name = split[i].substring(split[i].indexOf('\"') + 1); // uklanja sa pocetka "
+                name = name.substring(0, name.indexOf('\"')); //uklanja sa kraja "
                 this.columnNames.add(name);// dodaje ime kolone
                 continue;
             }
 
             //Dodaje value za tu kolonu
-            // 1 - uklanja ", split[i].length() - 1 - uklanja
-            String name = split[i].substring(1 , split[i].length() - 1);
-            this.values.add(name);
+            StringBuilder name = new StringBuilder();
+            split[i] = split[i].substring(split[i].indexOf('\"') + 1); // uklanja sa pocetka "
+
+            //Ako je -1 znaci da ne postoji " tj da je value sastavljen od dva dela na primer "de haank"
+            //onda zna da treba da spoji trenutni i sledeci index
+            while(i < split.length && split[i].indexOf('\"') == -1) {
+                name.append(split[i]).append(" ");
+                i++;
+            }
+
+            //Ako nikada ne bi trebalo da se desi
+            if (i == split.length)
+                break;
+
+            name.append(split[i].substring(0, split[i].indexOf('\"'))); //uklanja sa kraja "
+            this.values.add(name.toString()); //select z, zz, zz from employees
         }
 
-        //System.out.println(columnNames);
-        //System.out.println(values);
+        System.out.println(columnNames);
+        System.out.println(values);
     }
 }

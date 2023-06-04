@@ -2,6 +2,7 @@ package baze.database;
 
 import baze.data.Row;
 import baze.database.settings.Settings;
+import baze.model.adapter.mapper.Mapper;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoCredential;
 import com.mongodb.MongoException;
@@ -60,8 +61,20 @@ public class MyMongodatabase implements Database{
             //Uspostavlja konekicju
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
+            //Mapper mapper = new Mapper();
+            //TODO Uvek mora da ima &project
+            MongoCursor<org.bson.Document> cursor = database.getCollection(from).aggregate(
+                    Arrays.asList(
+                            Document.parse("{ $project: {\n" +
+                                    "    \"first_name\": 1,\n" +
+                                    "    \"last_name\": 1\n" +
+                                    "  }\n" +
+                                    "}")
+                    )
+            ).iterator();
             //Ovo je ko ResultSet za sql
-            //Umesto onog u agregate, bice mapper koji sve to radi za nas
+            //TODO Umesto onog u agregate, bice mapper koji sve to radi za nas
+            /*
             MongoCursor<org.bson.Document> cursor = database.getCollection("employees").aggregate(
                     Arrays.asList(
                             org.bson.Document.parse("{\n" +
@@ -83,6 +96,7 @@ public class MyMongodatabase implements Database{
                                     "}")
                     )
             ).iterator();
+             */
 
             while (cursor.hasNext()) {
                 Row row = new Row(); // Novi red za novu informaciju
@@ -91,13 +105,13 @@ public class MyMongodatabase implements Database{
                 Document document = cursor.next();//Uzima taj dokument informacija
                 Packer packer = new Packer(document.toJson());
 
-                packer.translate(); // translira dokument u hash mapu
+                packer.translate(); // translira dokument u listu kolona i value za te kolone
                 //Prolazi kroz sve kolone
                 for (int i = 0; i < packer.getColumnNames().size(); i++) {
                     //Dodaje ime kolone i value koji taj kolona ima
                     row.addField(packer.getColumnNames().get(i), packer.getValues().get(i));
                 }
-                //System.out.println(document.toJson());
+                System.out.println(document.toJson());
                 rows.add(row);//dodaje u niz  redova i ovaj red
             }
         }
