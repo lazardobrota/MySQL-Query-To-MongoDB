@@ -8,6 +8,6 @@ public class Main {
         MainFrame.getInstance().setVisible(true);
         MainFrame.getInstance().setAppCore(appCore);
 
-        appCore.readDataFromTable("departments"); // poziva metodu iz appcora gde u tabeli ko
+        //appCore.readDataFromTable("departments"); // poziva metodu iz appcora gde u tabeli ko
     }
 }

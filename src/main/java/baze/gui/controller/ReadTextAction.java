@@ -30,6 +30,7 @@ public class ReadTextAction extends AbstractAction {
 
         Mapper mapper = new Mapper(clauseAdapters);
         mapper.combineClauses();
+        MainFrame.getInstance().getAppCore().readDataFromTable(mapper.getFrom());
         System.out.println(clauseAdapters);
     }
 }
