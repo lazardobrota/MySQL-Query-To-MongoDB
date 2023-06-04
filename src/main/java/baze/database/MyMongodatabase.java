@@ -50,10 +50,9 @@ public class MyMongodatabase implements Database{
     }
 
     @Override
-    public List<Row> getDataFromTable(String from) {
+    public List<Row> getDataFromTable(Mapper mapper) {
 
         List<Row> rows = new ArrayList<>();
-
 
         try{
             this.initConnection();
@@ -61,9 +60,11 @@ public class MyMongodatabase implements Database{
             //Uspostavlja konekicju
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
-            //Mapper mapper = new Mapper();
             //TODO Uvek mora da ima &project
-            MongoCursor<org.bson.Document> cursor = database.getCollection(from).aggregate(
+            MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
+                    Arrays.asList(mapper.getDocuments().get(0))).iterator();
+            /*
+            MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(
                             Document.parse("{ $project: {\n" +
                                     "    \"first_name\": 1,\n" +
@@ -72,6 +73,7 @@ public class MyMongodatabase implements Database{
                                     "}")
                     )
             ).iterator();
+             */
             //Ovo je ko ResultSet za sql
             //TODO Umesto onog u agregate, bice mapper koji sve to radi za nas
             /*

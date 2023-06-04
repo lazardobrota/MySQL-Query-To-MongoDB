@@ -18,6 +18,7 @@ public class Mapper {
     String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
     public Mapper(List<ClauseAdapter> clauseAdapters) {
         this.clauseAdapters = clauseAdapters;
+        this.documents = new ArrayList<>();
 
         checkers = new ArrayList<>();
 
@@ -36,6 +37,8 @@ public class Mapper {
 
         //Prolazi kroz sve upite redom
         for (ClauseAdapter checker : checkers) {
+            StringBuilder stringBuilder = new StringBuilder(); // spaja stvari u stringbuilder
+
             //Prolazi kroz citavu listu klausovih adaptera koji su zapisani na mongo foricu i trazi onaj koji odgovara
             for (ClauseAdapter adapter : clauseAdapters) {
                 //Ako je from adapter
@@ -45,6 +48,8 @@ public class Mapper {
                 }
                 //Ako je select adapter
                 if (checker instanceof SelectAdapter && adapter instanceof SelectAdapter) {
+                    stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
+                    documents.add(Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je having

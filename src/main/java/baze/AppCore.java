@@ -5,7 +5,7 @@ import baze.database.MyMongodatabase;
 import baze.database.settings.Settings;
 import baze.database.settings.SettingsImplementation;
 import baze.gui.table.TableModel;
-import baze.gui.view.MainFrame;
+import baze.model.adapter.mapper.Mapper;
 import baze.model.validator.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +40,7 @@ public class AppCore {
     }
 
     //Unutar controllera preko mainframe ce pozivati ovu funkciju
-    public void readDataFromTable(String fromTable){
-        tableModel.setRows(this.database.getDataFromTable(fromTable));
+    public void readDataFromTable(Mapper mapper){
+        tableModel.setRows(this.database.getDataFromTable(mapper));
     }
 }

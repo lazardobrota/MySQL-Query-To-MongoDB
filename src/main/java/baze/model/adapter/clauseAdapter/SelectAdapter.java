@@ -17,7 +17,7 @@ public class SelectAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        if(adaptedOprt.contains("\"*\""))return  "select{}";
+        if(adaptedOprt.contains("\"*\""))return  "{}";
         String str = "{ ";
         if(!adaptedOprt.contains("\"_id\""))str+="\"_id\": 0, ";
         for(String oprt: adaptedOprt){
@@ -25,8 +25,6 @@ public class SelectAdapter extends ClauseAdapter {
         }
         str = str.substring(0, str.length() - 2); // uklanja zarez
         str +=" }";
-        return "select" +
-                str
-                ;
+        return str;
     }
 }

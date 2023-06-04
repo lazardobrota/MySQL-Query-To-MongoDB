@@ -37,7 +37,7 @@ public class ReadTextAction extends AbstractAction {
 
         Mapper mapper = new Mapper(clauseAdapters);
         mapper.combineClauses();
-        MainFrame.getInstance().getAppCore().readDataFromTable(mapper.getFrom());
+        MainFrame.getInstance().getAppCore().readDataFromTable(mapper);
         System.out.println(clauseAdapters);
     }
 }
