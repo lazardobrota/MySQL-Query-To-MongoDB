@@ -47,12 +47,17 @@ public class ClauseAdapter implements Adapter{
                 i++;
                 Oprt next = clause.getOperators().get(i);
                 if(next instanceof On){
-
                     str +="localField: "+srediAtribut(next.getRight().getLeft())
-                            +", "+srediAtribut(next.getRight().getLeft())+", as: "+srediAtribut(oprt.getLeft());
+                            +", "+srediAtribut(next.getRight().getLeft())
+                            +", as: "+srediAtribut(oprt.getLeft());
                 }else {//Using
-
+                    str +="localField: "+srediAtribut(next.getRight())
+                            +", "+srediAtribut(next.getRight())
+                            +", as: "+srediAtribut(oprt.getLeft());
                 }
+                adaptedOprt.add(str);
+                str = "";
+                continue;
 
             }
 
@@ -81,7 +86,7 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = "\"$and\": [ ";
+                str = "$and: [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
@@ -100,7 +105,7 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof Or){
                 // sastavljanje stringa za or
-                str = "\"$or\": [ ";
+                str = "$or: [ ";
                 str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
