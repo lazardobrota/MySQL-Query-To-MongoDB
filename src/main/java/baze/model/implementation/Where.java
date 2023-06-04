@@ -19,8 +19,6 @@ public class Where extends Clause{
     //Where: Equals, GreaterThan, LowerThan, Like, AND, OR
     @Override
     public void fillOut(String[] lines, int l, int r) {
-        // TODO OVO KORISTIS KAD POZIVAS FACTORY
-        // FactoryUtils.getFactory(lines[l]).getOprt(lines[l]);
 
         for (int i = l; i < r; i++) {
             //Kada rec nije obican string to znaci da je operator neki
@@ -64,8 +62,6 @@ public class Where extends Clause{
     //Where: Equals, GreaterThan, LowerThan, Like, AND, OR
     @Override
     public void fillOut(String[] lines, int l, int r) {
-        // TODO OVO KORISTIS KAD POZIVAS FACTORY
-        // FactoryUtils.getFactory(lines[l]).getOprt(lines[l]);
 
         for (int i = l; i < r; i++) {
             //Kada rec nije null to znaci da je operator neki

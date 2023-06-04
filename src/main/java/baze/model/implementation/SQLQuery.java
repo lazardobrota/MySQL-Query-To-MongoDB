@@ -12,12 +12,9 @@ import java.util.*;
 @Getter
 @Setter
 public class SQLQuery implements AClause{
-    //TODO Ideja: prolazi kroz listu reci i provera da li postoji u hashmapi, ako postoji upise je u hashmapu i stavi to iz hashmap u neku listu
-    // zatim tu listu dalje prosledjuje gde treba
 
     private List<AClause> claues = new ArrayList<>();
 
-    //TODO Ide sada ( select ), znaci zagrad space dawdawdawdaw space zagrada
     public SQLQuery() {
     }
 
@@ -104,13 +101,5 @@ public class SQLQuery implements AClause{
 
             i++;
         }
-
-
-
-        /*TODO ovo je za validator
-        //Ako nema select ili from nema sta dalje da gleda
-        if (!line[0].matches("select") || !line[2].matches("from"))
-            return;
-        */
     }
 }
