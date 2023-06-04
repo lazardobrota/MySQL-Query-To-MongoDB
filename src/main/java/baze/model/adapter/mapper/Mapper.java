@@ -14,7 +14,7 @@ import java.util.List;
 public class Mapper {
     List<ClauseAdapter> clauseAdapters;
     List<ClauseAdapter> checkers;
-    List<Document> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
+    List<String> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
     String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
     public Mapper(List<ClauseAdapter> clauseAdapters) {
         this.clauseAdapters = clauseAdapters;
@@ -48,19 +48,19 @@ public class Mapper {
                 //Ako je select adapter
                 if (checker instanceof SelectAdapter && adapter instanceof SelectAdapter) {
                     stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
-                    documents.add(Document.parse(stringBuilder.toString()));
+                    documents.add(stringBuilder.toString());
                     break;
                 }
                 //Ako je having
                 if (checker instanceof HavingAdapter && adapter instanceof HavingAdapter) {
                     stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
-                    documents.add(Document.parse(stringBuilder.toString()));
+                    documents.add(stringBuilder.toString());
                     break;
                 }
                 //Ako je where
                 if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //TODO Ne moze da postoji "[" u dokumentu
-                    //stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
-                   // documents.add(Document.parse(stringBuilder.toString()));
+                    stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
+                    documents.add(stringBuilder.toString());
                     break;
                 }
                 //Ako je group by

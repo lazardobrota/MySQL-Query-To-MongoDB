@@ -8,7 +8,6 @@ import java.util.List;
 
 public class WhereAdapter extends ClauseAdapter {
 
-    //todo where ce mozda morati da menja kako radi
     public WhereAdapter() {
         super();
     }
@@ -18,8 +17,13 @@ public class WhereAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < adaptedOprt.size(); i++) {
+            stringBuilder.append(adaptedOprt.get(i)).append(", ");
+        }
+        String str = stringBuilder.substring(0, stringBuilder.length() - 2);
         return "{" +
-                adaptedOprt +
+                str +
                 '}';
     }
 }

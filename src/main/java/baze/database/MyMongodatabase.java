@@ -58,10 +58,10 @@ public class MyMongodatabase implements Database{
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
             //TODO Uvek mora da ima &project
-            /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
-                    Arrays.asList(mapper.getDocuments().get(0))).iterator();
-             */
+                    Arrays.asList(org.bson.Document.parse(mapper.getDocuments().get(0)), org.bson.Document.parse(mapper.getDocuments().get(1)))).iterator();
+
+            System.out.println(cursor.next());
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(
@@ -75,6 +75,7 @@ public class MyMongodatabase implements Database{
              */
             //Ovo je ko ResultSet za sql
             //TODO Umesto onog u agregate, bice mapper koji sve to radi za nas
+            /*
             MongoCursor<org.bson.Document> cursor = database.getCollection("employees").aggregate(
                     Arrays.asList(
                             org.bson.Document.parse("{\n" +
@@ -95,7 +96,8 @@ public class MyMongodatabase implements Database{
                                     "  }\n" +
                                     "}")
                     )
-            ).iterator();
+            ).iterator();\
+             */
 
             while (cursor.hasNext()) {
                 Row row = new Row(); // Novi red za novu informaciju
