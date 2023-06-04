@@ -13,8 +13,6 @@ public class OrderByAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        return "order by{" +
-                adaptedOprt +
-                '}';
+        return "{" + adaptedOprt + '}';
     }
 }

@@ -14,7 +14,7 @@ public class HavingAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        return "having{" +
+        return "{" +
                 adaptedOprt +
                 '}';
     }

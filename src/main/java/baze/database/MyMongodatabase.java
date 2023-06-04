@@ -12,10 +12,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class MyMongodatabase implements Database{
     private Settings settings; // cuva informacije o bazi, ip, username, ...
@@ -61,8 +58,10 @@ public class MyMongodatabase implements Database{
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
             //TODO Uvek mora da ima &project
+            /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(mapper.getDocuments().get(0))).iterator();
+             */
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(
@@ -76,7 +75,6 @@ public class MyMongodatabase implements Database{
              */
             //Ovo je ko ResultSet za sql
             //TODO Umesto onog u agregate, bice mapper koji sve to radi za nas
-            /*
             MongoCursor<org.bson.Document> cursor = database.getCollection("employees").aggregate(
                     Arrays.asList(
                             org.bson.Document.parse("{\n" +
@@ -98,21 +96,27 @@ public class MyMongodatabase implements Database{
                                     "}")
                     )
             ).iterator();
-             */
 
             while (cursor.hasNext()) {
                 Row row = new Row(); // Novi red za novu informaciju
                 row.setName("hello"); // to treba from da bude
 
                 Document document = cursor.next();//Uzima taj dokument informacija
+                Set<String> keys = document.keySet();
                 Packer packer = new Packer(document.toJson());
 
                 packer.translate(); // translira dokument u listu kolona i value za te kolone
                 //Prolazi kroz sve kolone
-                for (int i = 0; i < packer.getColumnNames().size(); i++) {
+                for (String r : keys) {
                     //Dodaje ime kolone i value koji taj kolona ima
+                    row.addField(r, document.get(r));
+                }
+
+                /*
+                for (int i = 0; i < packer.getColumnNames().size(); i++) {
                     row.addField(packer.getColumnNames().get(i), packer.getValues().get(i));
                 }
+                 */
                 System.out.println(document.toJson());
                 rows.add(row);//dodaje u niz  redova i ovaj red
             }

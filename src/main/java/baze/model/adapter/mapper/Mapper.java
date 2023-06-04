@@ -23,13 +23,12 @@ public class Mapper {
         checkers = new ArrayList<>();
 
         //Jako je bitan redosled ovih
-        //TODO Fali prazan konstruktor u adapterima, nisam ih menjao(tj dodao) jer cekam andreju da mi posalje prvo nesto iz njih
-        checkers.add(new FromAdapter());
-        checkers.add(new WhereAdapter());
-        checkers.add(new HavingAdapter());
-        checkers.add(new SelectAdapter()); // .project
-        checkers.add(new GroupByAdapter());
-        checkers.add(new OrderByAdapter());
+        checkers.add(new FromAdapter());    // nista dodatno ne treba
+        checkers.add(new WhereAdapter());   // $match:
+        checkers.add(new HavingAdapter());  // $match:
+        checkers.add(new SelectAdapter());  // $project:
+        checkers.add(new GroupByAdapter()); // $group:
+        checkers.add(new OrderByAdapter()); // $sort:
     }
 
     //TODO IDEJA JE DA PRODJE REDOM KAKO BI ISLO U MONGO I ONDA TRAZI U CLAUSEADAPTERS LISTI TAJ KOJI CE SE POTREFITI SA ONIM KOJI JE TRENUTNO SETOVA
@@ -54,18 +53,26 @@ public class Mapper {
                 }
                 //Ako je having
                 if (checker instanceof HavingAdapter && adapter instanceof HavingAdapter) {
+                    stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
+                    documents.add(Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je where
-                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) {
+                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //TODO Ne moze da postoji "[" u dokumentu
+                    //stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
+                   // documents.add(Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
-                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) {
+                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //TODO
+                    //stringBuilder.append("{ $group: ").append(adapter.toString()).append("}");
+                    //documents.add(Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je order by
-                if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) {
+                if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) { //TODO
+                    //stringBuilder.append("{ $sort: ").append(adapter.toString()).append("}");
+                    //documents.add(Document.parse(stringBuilder.toString()));
                     break;
                 }
             }

@@ -12,8 +12,6 @@ public class GroupByAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        return "group by{" +
-                adaptedOprt +
-                '}';
+        return "{" + adaptedOprt + '}';
     }
 }

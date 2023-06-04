@@ -18,7 +18,7 @@ public class WhereAdapter extends ClauseAdapter {
     }
     @Override
     public String toString() {
-        return "where{" +
+        return "{" +
                 adaptedOprt +
                 '}';
     }
