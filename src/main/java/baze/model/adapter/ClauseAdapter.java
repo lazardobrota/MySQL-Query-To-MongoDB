@@ -65,7 +65,7 @@ public class ClauseAdapter implements Adapter{
                 str = srediAtribut(oprt.getLeft());
                 str+=": /";
                 String temp = srediAtribut(oprt.getRight());
-                temp = temp.substring(2,temp.length()-2);
+                temp = temp.substring(3,temp.length()-3);
                 if(temp.contains("%")){//pita da li se % nalazi u stringu
                     if(temp.charAt(0) == '%'){//pita da li se % nalazi na pocetku
                         if(temp.charAt(temp.length()-1) == '%'){//pita da li se % nalazi na kraju
