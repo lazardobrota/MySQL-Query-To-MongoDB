@@ -25,8 +25,7 @@ public class Using extends Oprt {
     @Override
     public String toString() {
         return "Using{" +
-                "left=" + left +
-                ", right=" + right +
+                ", right=" + right.getValue() +
                 '}';
     }
 }

@@ -42,8 +42,21 @@ public class ClauseAdapter implements Adapter{
             oprt = clause.getOperators().get(i);
 
             //ovde!!!!!!!!!!!!!!!!!!!!!!!!
+            if(oprt instanceof Join){
+                str = "$lookup: { ";
+                i++;
+                Oprt next = clause.getOperators().get(i);
+                if(next instanceof On){
 
-            if(oprt instanceof Like){
+                    str +="localField: "+srediAtribut(next.getRight().getLeft())
+                            +", "+srediAtribut(next.getRight().getLeft())+", as: "+srediAtribut(oprt.getLeft());
+                }else {//Using
+
+                }
+
+            }
+
+            if(oprt instanceof Like){//sintaksa zaa like: a like (nesto)
                 str = srediAtribut(oprt.getLeft());
                 str+=": /";
                 String temp = srediAtribut(oprt.getRight());
@@ -110,6 +123,7 @@ public class ClauseAdapter implements Adapter{
     public String stringConverter(Oprt oprt){
         //pomocna funkcija za pripremu String-ova za podupite
         String str;
+
         if(oprt instanceof Avg){
             str = "\"$avg\": " + srediAtribut(oprt.getRight());
             return str;
