@@ -86,37 +86,37 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = "$and: [ ";
-                str += adaptedOprt.get(adaptedOprt.size()-1);
+                str = "{ $and: [ {";
+                str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
-                str +=", "+this.stringConverter(clause.getOperators().get(i));
+                str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
 
                 if(i<=clause.getOperators().size()-2)
                     if(clause.getOperators().get(i+1) instanceof And){
                         i+=2;
-                        str +=", "+this.stringConverter(clause.getOperators().get(i));
+                        str +=", {"+this.stringConverter(clause.getOperators().get(i))+ " }";
                     }
                 
-                str += " ]";
+                str += " ] }";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof Or){
                 // sastavljanje stringa za or
-                str = "$or: [ ";
-                str += adaptedOprt.get(adaptedOprt.size()-1);
+                str = "{ $or: [ {";
+                str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
-                str +=", "+this.stringConverter(clause.getOperators().get(i));
+                str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
                 if(i<=clause.getOperators().size()-2)
                     if(clause.getOperators().get(i+1) instanceof Or){
                         i+=2;
-                        str +=", "+this.stringConverter(clause.getOperators().get(i));
+                        str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
                     }
 
-                str += " ]";
+                str += " ] }";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
@@ -162,7 +162,7 @@ public class ClauseAdapter implements Adapter{
 
             str = "$gt";//provera da li je u pitanju >= ili >
             if(((GreaterThan) oprt).isEqual())str+="e";
-            str += ": [ " + left+", "+right +" ]";
+            str = "{ "+left+": { "+str+": "+right +" } }";
             return str;
         }
         if(oprt instanceof LowerThan){
@@ -175,7 +175,7 @@ public class ClauseAdapter implements Adapter{
 
             str = "$lt";
             if(((LowerThan) oprt).isEqual())str+="e";
-            str += ": [ " + left +", "+ right +" ]";
+            str = "{ "+left+": { "+str+": "+right +" } }";
             return str;
         }
         if(oprt instanceof In){
