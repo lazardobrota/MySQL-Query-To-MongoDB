@@ -77,9 +77,9 @@ public class ClauseAdapter implements Adapter{
                         if(temp.charAt(temp.length()-1) == '%'){//pita da li sadrzi % na kraju
                             str+="^"+temp.substring(0,temp.length()-1)+"/i";;
                         }
-                        else str=srediAtribut(oprt.getLeft())+": /"+srediAtribut(oprt.getRight())+"/i";
+                        else str=srediAtribut(oprt.getLeft())+": /"+oprt.getRight().getValue()+"/i";
                     }
-                }else str=srediAtribut(oprt.getLeft())+": /"+srediAtribut(oprt.getRight())+"/i";
+                }else str=srediAtribut(oprt.getLeft())+": /"+oprt.getRight().getValue()+"/i";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
