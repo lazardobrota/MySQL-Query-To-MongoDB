@@ -24,4 +24,14 @@ public class WhereAdapter extends ClauseAdapter {
         String str = stringBuilder.substring(0, stringBuilder.length() - 2);
         return str;
     }
+
+    @Override
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < adaptedOprt.size(); i++) {
+            stringBuilder.append(adaptedOprt.get(i)).append(", ");
+        }
+        String str = stringBuilder.substring(0, stringBuilder.length() - 2);
+        return str;
+    }
 }

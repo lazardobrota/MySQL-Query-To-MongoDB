@@ -12,7 +12,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ClauseAdapter implements Adapter{
+public abstract class ClauseAdapter implements Adapter{
     protected Clause clause;
     protected  ClauseAdapter podupitAdapter;
     protected List<String> adaptedOprt;
@@ -34,6 +34,8 @@ public class ClauseAdapter implements Adapter{
                  adaptedOprt +
                 '}';
     }
+
+    public abstract String adapterToString(ClauseAdapter clauseAdapter);
 
     public void fillOutList(){
 

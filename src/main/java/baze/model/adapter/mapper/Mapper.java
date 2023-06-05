@@ -44,7 +44,7 @@ public class Mapper {
             for (ClauseAdapter adapter : clauseAdapters) {
                 //Ako je from adapter
                 if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
-                    from = adapter.toString(); // uzima za from deo
+                    from = adapter.adapterToString(adapter); // uzima za from deo
                     break;
                 }
                 //Ako je select adapter
@@ -52,32 +52,32 @@ public class Mapper {
                     if (adapter.toString().length() == 0)
                         break;
                     selectAdapter = (SelectAdapter) adapter;
-                    stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
+                    stringBuilder.append("{ $project: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je having
                 if (checker instanceof HavingAdapter && adapter instanceof HavingAdapter) {
-                    stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
+                    stringBuilder.append("{ $match: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je where
-                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //todo treba podupit da se uradi
-                    stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
+                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //todo treba podupit da se uradi i druge verzije like da se skloni {}, 'S%', ...
+                    stringBuilder.append("{ $match: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
                 if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //TODO treba agregacije iz select ovde da se stave i da ne postoji $project
                     documents.remove(documents.size() - 1); // uklanja select jer je select provera
-                    stringBuilder.append("{ $group: ").append(((GroupByAdapter) adapter).groupByToString(selectAdapter)).append("}");
+                    stringBuilder.append("{ $group: ").append(adapter.adapterToString(selectAdapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je order by
                 if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) {
-                    stringBuilder.append("{ $sort: ").append(adapter.toString()).append("}");
+                    stringBuilder.append("{ $sort: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }

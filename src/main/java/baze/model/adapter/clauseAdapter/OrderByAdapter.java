@@ -33,4 +33,15 @@ public class OrderByAdapter extends ClauseAdapter {
         String str = stringBuilder.substring(0, stringBuilder.length() - 2) + "}"; // "}" oznaci kra
         return str;
     }
+
+    @Override
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{ "); //posle $sort:
+        for (int i = 0; i < adaptedOprt.size(); i++) {
+            stringBuilder.append(adaptedOprt.get(i)).append(", ");
+        }
+        String str = stringBuilder.substring(0, stringBuilder.length() - 2) + "}"; // "}" oznaci kra
+        return str;
+    }
 }

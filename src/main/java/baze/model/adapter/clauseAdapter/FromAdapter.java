@@ -17,4 +17,9 @@ public class FromAdapter extends ClauseAdapter {
     public String toString() {
         return this.adaptedOprt.get(0).substring(1,adaptedOprt.get(0).length()-1);
     }
+
+    @Override
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        return this.adaptedOprt.get(0).substring(1,adaptedOprt.get(0).length()-1);
+    }
 }

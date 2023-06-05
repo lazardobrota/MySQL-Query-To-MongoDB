@@ -18,4 +18,9 @@ public class HavingAdapter extends ClauseAdapter {
                 adaptedOprt +
                 '}';
     }
+
+    @Override
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        return null;
+    }
 }

@@ -32,4 +32,21 @@ public class SelectAdapter extends ClauseAdapter {
         str +=" }";
         return str;
     }
+
+    @Override
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        if(adaptedOprt.contains("\"*\""))return  "";
+        String str = "{ ";
+        if(!adaptedOprt.contains("\"_id\""))str+="\"_id\": 0, ";
+        for(String oprt: adaptedOprt){
+            if(oprt.contains("{")){
+                str+= oprt+", ";
+            }else{
+                str+=oprt+": 1, ";
+            }
+        }
+        str = str.substring(0, str.length() - 2); // uklanja zarez
+        str +=" }";
+        return str;
+    }
 }

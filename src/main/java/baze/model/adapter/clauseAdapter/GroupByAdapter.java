@@ -50,4 +50,23 @@ public class GroupByAdapter extends ClauseAdapter {
         //Uklanja zarez sa kraja
         return stringBuilder.substring(0, stringBuilder.length() - 2) + "}}";
     }
+
+    @Override // ClauseAdapter je ovde SelectAdapter
+    public String adapterToString(ClauseAdapter clauseAdapter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{_id: {");
+        for (String s : adaptedOprt) {
+            stringBuilder.append(s).append(", ");
+        }
+
+        //Uklanja zarez sa kraja
+        stringBuilder = new StringBuilder(stringBuilder.substring(0, stringBuilder.length() - 2) + "}");
+
+        for (String s : clauseAdapter.getAdaptedOprt()) {
+            //Ako ima agregaciju da je doda u $group
+            if (s.contains("$max") || s.contains("$avg") || s.contains("$min") || s.contains("$count") || s.contains("$sum"))
+                stringBuilder.append(", ").append(s);
+        }
+        return stringBuilder.append("}").toString();
+    }
 }
