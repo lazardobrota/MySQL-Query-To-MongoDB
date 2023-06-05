@@ -14,7 +14,7 @@ import java.util.List;
 public class Mapper {
     private List<ClauseAdapter> clauseAdapters;
     private List<ClauseAdapter> checkers;
-    private List<String> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
+    private List<org.bson.Document> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
     private String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
     private boolean project; // na pocetku je false, ako postoji project onda se stavlja na true
 
@@ -34,7 +34,7 @@ public class Mapper {
         checkers.add(new OrderByAdapter()); // $sort:
     }
 
-    //TODO IDEJA JE DA PRODJE REDOM KAKO BI ISLO U MONGO I ONDA TRAZI U CLAUSEADAPTERS LISTI TAJ KOJI CE SE POTREFITI SA ONIM KOJI JE TRENUTNO SETOVA
+    //IDEJA JE DA PRODJE REDOM KAKO BI ISLO U MONGO I ONDA TRAZI U CLAUSEADAPTERS LISTI TAJ KOJI CE SE POTREFITI SA ONIM KOJI JE TRENUTNO SETOVA
     public String combineClauses() {
 
         //Prolazi kroz sve upite redom
@@ -54,19 +54,19 @@ public class Mapper {
                         break;
                     project = true;
                     stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
-                    documents.add(stringBuilder.toString());
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je having
                 if (checker instanceof HavingAdapter && adapter instanceof HavingAdapter) {
                     stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
-                    documents.add(stringBuilder.toString());
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je where
                 if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) {
                     stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
-                    documents.add(stringBuilder.toString());
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
@@ -78,7 +78,7 @@ public class Mapper {
                 //Ako je order by
                 if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) {
                     stringBuilder.append("{ $sort: ").append(adapter.toString()).append("}");
-                    documents.add(stringBuilder.toString());
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
             }

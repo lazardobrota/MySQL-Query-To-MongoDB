@@ -57,17 +57,8 @@ public class MyMongodatabase implements Database{
             //Uspostavlja konekicju
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
-            MongoCursor<org.bson.Document> cursor;
             //TODO Uvek mora da ima &project
-            //Ako nema * project (select)
-            if (mapper.isProject()) {
-                cursor = database.getCollection(mapper.getFrom()).aggregate(
-                        Arrays.asList(org.bson.Document.parse(mapper.getDocuments().get(0)))).iterator();
-            }
-            else {//Ako ima * project(select)
-                cursor = database.getCollection(mapper.getFrom()).aggregate(
-                        Arrays.asList(org.bson.Document.parse(mapper.getDocuments().get(0)))).iterator();
-            }
+            MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(mapper.getDocuments()).iterator();
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(
