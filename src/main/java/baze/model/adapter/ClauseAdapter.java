@@ -84,7 +84,7 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = "{ $and: [ {";
+                str = " $and: [ {";
                 str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
@@ -96,7 +96,7 @@ public class ClauseAdapter implements Adapter{
                         str +=", {"+this.stringConverter(clause.getOperators().get(i))+ " }";
                     }
                 
-                str += " ] }";
+                str += " ] ";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
