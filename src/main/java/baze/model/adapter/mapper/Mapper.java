@@ -16,12 +16,11 @@ public class Mapper {
     private List<ClauseAdapter> checkers;
     private List<org.bson.Document> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
     private String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
-    private boolean project; // na pocetku je false, ako postoji project onda se stavlja na true
+    private SelectAdapter selectAdapter; // na pocetku je false, ako postoji project onda se stavlja na true
 
     public Mapper(List<ClauseAdapter> clauseAdapters) {
         this.clauseAdapters = clauseAdapters;
         this.documents = new ArrayList<>();
-        project = false;
 
         checkers = new ArrayList<>();
 
@@ -44,7 +43,7 @@ public class Mapper {
             //Prolazi kroz citavu listu klausovih adaptera koji su zapisani na mongo foricu i trazi onaj koji odgovara
             for (ClauseAdapter adapter : clauseAdapters) {
                 //Ako je from adapter
-                if (checker instanceof FromAdapter && adapter instanceof FromAdapter) {
+                if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
                     from = adapter.toString(); // uzima za from deo
                     break;
                 }
@@ -52,7 +51,7 @@ public class Mapper {
                 if (checker instanceof SelectAdapter && adapter instanceof SelectAdapter) {
                     if (adapter.toString().length() == 0)
                         break;
-                    project = true;
+                    selectAdapter = (SelectAdapter) adapter;
                     stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
@@ -64,14 +63,15 @@ public class Mapper {
                     break;
                 }
                 //Ako je where
-                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) {
+                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //todo treba podupit da se uradi
                     stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
-                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //TODO
-                    stringBuilder.append("{ $group: ").append(adapter.toString()).append("}");
+                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //TODO treba agregacije iz select ovde da se stave i da ne postoji $project
+                    documents.remove(documents.size() - 1); // uklanja select jer je select provera
+                    stringBuilder.append("{ $group: ").append(((GroupByAdapter) adapter).groupByToString(selectAdapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
