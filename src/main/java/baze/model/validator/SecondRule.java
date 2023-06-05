@@ -4,6 +4,10 @@ import baze.model.implementation.GroupBy;
 import baze.model.implementation.SQLQuery;
 import baze.model.implementation.Select;
 import baze.model.implementation.operators.ColumnString;
+import baze.model.implementation.operators.Oprt;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SecondRule extends Rule{
     public SecondRule(String name) {
@@ -12,6 +16,8 @@ public class SecondRule extends Rule{
 
     @Override
     public boolean ruleCheck(SQLQuery sqlQuery) {
+        List<Oprt> columns = new ArrayList<>(); // cuva sve sto nije agregacije iz select
+
         boolean agregation = false, groupBy = false;
         for (int i = 0; i < sqlQuery.getClaues().size(); i++) {
             //Pronasao je select
@@ -25,9 +31,20 @@ public class SecondRule extends Rule{
                         agregation = true;
                         break;
                     }
+                    //Ako je columnString
+                    columns.add(select.getOperators().get(j));
                 }
             }
-            else if (sqlQuery.getClaues().get(i) instanceof GroupBy) {
+            else if (agregation && sqlQuery.getClaues().get(i) instanceof GroupBy) {
+                GroupBy group = (GroupBy) sqlQuery.getClaues().get(i);
+                //Proverava da li groupby ima sve sto i select a da nije agregacija
+                for (Oprt column : columns) {
+                    //Ako ne sadrzi
+                    if (!group.getOperators().contains(column)) {
+                        setMessage("Fale stvari u group by");
+                        return false;
+                    }
+                }
                 groupBy = true;
             }
 
