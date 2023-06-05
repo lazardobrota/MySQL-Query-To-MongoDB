@@ -59,7 +59,6 @@ public class MyMongodatabase implements Database{
 
             MongoCursor<org.bson.Document> cursor;
             //TODO Uvek mora da ima &project
-
             //Ako nema * project (select)
             if (mapper.isProject()) {
                 cursor = database.getCollection(mapper.getFrom()).aggregate(
@@ -67,12 +66,8 @@ public class MyMongodatabase implements Database{
             }
             else {//Ako ima * project(select)
                 cursor = database.getCollection(mapper.getFrom()).aggregate(
-                        Arrays.asList(org.bson.Document.parse("{\n" +
-                                "  $match: {}\n" +
-                                "}"))).iterator();
+                        Arrays.asList(org.bson.Document.parse(mapper.getDocuments().get(0)))).iterator();
             }
-
-            System.out.println(cursor.next());
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(
                     Arrays.asList(
@@ -85,6 +80,17 @@ public class MyMongodatabase implements Database{
             ).iterator();
              */
             //Ovo je ko ResultSet za sql
+            /*
+            MongoCursor<org.bson.Document> cursor = database.getCollection("employees").aggregate(
+                    Arrays.asList(
+                            org.bson.Document.parse("{\n" +
+                                    "  $match: {$and: [ { first_name: \"Steven\"}, {last_name: \"King\"}]}\n" +
+                                    "}")
+                    )
+            ).iterator();
+
+             */
+
             //TODO Umesto onog u agregate, bice mapper koji sve to radi za nas
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection("employees").aggregate(

@@ -64,7 +64,7 @@ public class Mapper {
                     break;
                 }
                 //Ako je where
-                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //TODO Ne moze da postoji "[" u dokumentu
+                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) {
                     stringBuilder.append("{ $match: ").append(adapter.toString()).append("}");
                     documents.add(stringBuilder.toString());
                     break;

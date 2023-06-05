@@ -22,8 +22,6 @@ public class WhereAdapter extends ClauseAdapter {
             stringBuilder.append(adaptedOprt.get(i)).append(", ");
         }
         String str = stringBuilder.substring(0, stringBuilder.length() - 2);
-        return "{" +
-                str +
-                '}';
+        return str;
     }
 }
