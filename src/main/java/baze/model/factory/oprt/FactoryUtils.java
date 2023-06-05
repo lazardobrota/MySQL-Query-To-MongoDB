@@ -18,11 +18,15 @@ public class FactoryUtils {
     private static final CountFactory countFactory = new CountFactory();
     private static final RownumFactory rownumFactory = new RownumFactory();
     private static final ColumnStringFactory columnStringFactory = new ColumnStringFactory();
+    private static final SumFactory sumFactory = new SumFactory();
+
 
     public static OprtFactory getFactory(String operation) {
+        if(operation.contains("sum()") || operation.matches("sum"))
+            return sumFactory;
         if(operation.matches("rownum"))
             return rownumFactory;
-        if(operation.matches("count") || operation.contains("count"))
+        if(operation.matches("count") || operation.contains("count("))
             return countFactory;
         if (operation.matches("and"))
             return andFactory;

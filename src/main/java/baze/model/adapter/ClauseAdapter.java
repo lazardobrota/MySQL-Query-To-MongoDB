@@ -3,9 +3,7 @@ package baze.model.adapter;
 import baze.model.factory.adapter.AdapterFactoryUtils;
 import baze.model.implementation.Clause;
 import baze.model.implementation.operators.*;
-import baze.model.implementation.operators.agregation.Avg;
-import baze.model.implementation.operators.agregation.Max;
-import baze.model.implementation.operators.agregation.Min;
+import baze.model.implementation.operators.agregation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,7 +126,18 @@ public class ClauseAdapter implements Adapter{
     public String stringConverter(Oprt oprt){
         //pomocna funkcija za pripremu String-ova za podupite
         String str;
-
+        if(oprt instanceof Sum){
+            String buf = srediAtribut(oprt.getRight());
+            if(buf.contains("*"))buf = "1";
+            str = "{ $sum: " + buf+" }";
+            return str;
+        }
+        if(oprt instanceof Count){
+            String buf = srediAtribut(oprt.getRight());
+            if(buf.contains("*"))buf = "1";
+            str = "{ $sum: " + buf+" }";
+            return str;
+        }
         if(oprt instanceof Avg){
             str = "{ $avg: " + srediAtribut(oprt.getRight())+" }";
             return str;
