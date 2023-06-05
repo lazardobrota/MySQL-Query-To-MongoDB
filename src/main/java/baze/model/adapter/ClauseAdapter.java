@@ -63,16 +63,16 @@ public class ClauseAdapter implements Adapter{
 
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = "{ $and: [ {";
-                str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
+                str = "{ $and: [ ";
+                str += adaptedOprt.get(adaptedOprt.size()-1)+" ";
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
-                str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
+                str +=", "+this.stringConverter(clause.getOperators().get(i));
 
                 if(i<=clause.getOperators().size()-2)
                     if(clause.getOperators().get(i+1) instanceof And){
                         i+=2;
-                        str +=", {"+this.stringConverter(clause.getOperators().get(i))+ " }";
+                        str +=", "+this.stringConverter(clause.getOperators().get(i));
                     }
                 
                 str += " ] }";
@@ -82,15 +82,15 @@ public class ClauseAdapter implements Adapter{
             }
             if(oprt instanceof Or){
                 // sastavljanje stringa za or
-                str = "{ $or: [ {";
-                str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
+                str = "{ $or: [ ";
+                str += adaptedOprt.get(adaptedOprt.size()-1);
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
-                str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
+                str +=", "+this.stringConverter(clause.getOperators().get(i));
                 if(i<=clause.getOperators().size()-2)
                     if(clause.getOperators().get(i+1) instanceof Or){
                         i+=2;
-                        str +=", {"+this.stringConverter(clause.getOperators().get(i))+" }";
+                        str +=", "+this.stringConverter(clause.getOperators().get(i));
                     }
 
                 str += " ] }";
@@ -124,7 +124,7 @@ public class ClauseAdapter implements Adapter{
                     else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
                 }
             }else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
-            str+=" }";
+            str = "{ "+str+" }";
             return str;
         }
         if(oprt instanceof Sum){
