@@ -28,10 +28,7 @@ public class ColumnString extends Oprt {
             return false;
         ColumnString that = (ColumnString) obj;
 
-
-        if (this.value.equals(that.value))
-            return true;
-        return false;
+        return this.value.equals(that.value);
     }
 
     @Override

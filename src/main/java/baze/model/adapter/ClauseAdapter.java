@@ -112,7 +112,7 @@ public abstract class ClauseAdapter implements Adapter{
         //pomocna funkcija za pripremu String-ova za podupite
         String str;
         if(oprt instanceof Like){//sintaksa zaa like: a like (nesto)
-            str ="{ "+srediAtribut(oprt.getLeft());
+            str =srediAtribut(oprt.getLeft());
             str+=": /";
             String temp = srediAtribut(oprt.getRight());
             temp = temp.substring(2,temp.length()-2);
