@@ -1,5 +1,6 @@
 package baze.model.adapter;
 
+import baze.model.adapter.clauseAdapter.FromAdapter;
 import baze.model.factory.adapter.AdapterFactoryUtils;
 import baze.model.implementation.Clause;
 import baze.model.implementation.operators.*;
@@ -57,7 +58,7 @@ public abstract class ClauseAdapter implements Adapter{
                 }else {//Using
                     str +="localField: "+srediAtribut(next.getRight())
                             +", "+srediAtribut(next.getRight())
-                            +", as: "+srediAtribut(oprt.getLeft());
+                            +", as: "+ srediAtribut(oprt.getLeft());
                 }
                 str +=" }";
                 adaptedOprt.add(str);
@@ -215,7 +216,8 @@ public abstract class ClauseAdapter implements Adapter{
         if(oprt == null) return "";
 
         str = "\""+oprt.getValue()+"\"";
-
+        if (this instanceof FromAdapter)
+            ((FromAdapter) this).setFrom(oprt.getValue());
         return str;
 
     }
