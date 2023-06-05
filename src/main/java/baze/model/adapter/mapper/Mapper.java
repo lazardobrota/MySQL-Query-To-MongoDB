@@ -12,13 +12,16 @@ import java.util.List;
 @Getter
 @Setter
 public class Mapper {
-    List<ClauseAdapter> clauseAdapters;
-    List<ClauseAdapter> checkers;
-    List<String> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
-    String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
+    private List<ClauseAdapter> clauseAdapters;
+    private List<ClauseAdapter> checkers;
+    private List<String> documents; // cuvace sve metode koje se prave, tehnicki kao ceo string kao kod za mongo, samo for ne cuvsa
+    private String from = "employees"; // posebno za from, on se jedini koristi samo kao string, na pocetku samo stavljeno da ima barem emloyees
+    private boolean project; // na pocetku je false, ako postoji project onda se stavlja na true
+
     public Mapper(List<ClauseAdapter> clauseAdapters) {
         this.clauseAdapters = clauseAdapters;
         this.documents = new ArrayList<>();
+        project = false;
 
         checkers = new ArrayList<>();
 
@@ -47,6 +50,9 @@ public class Mapper {
                 }
                 //Ako je select adapter
                 if (checker instanceof SelectAdapter && adapter instanceof SelectAdapter) {
+                    if (adapter.toString().length() == 0)
+                        break;
+                    project = true;
                     stringBuilder.append("{ $project: ").append(adapter.toString()).append("}");
                     documents.add(stringBuilder.toString());
                     break;
