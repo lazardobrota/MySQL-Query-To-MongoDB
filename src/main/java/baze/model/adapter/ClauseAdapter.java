@@ -41,7 +41,7 @@ public class ClauseAdapter implements Adapter{
 
             //ovde!!!!!!!!!!!!!!!!!!!!!!!!
             if(oprt instanceof Join){
-                str = "$lookup: { ";
+                str = "{ $lookup: { ";
                 i++;
                 Oprt next = clause.getOperators().get(i);
                 if(next instanceof On){
@@ -53,6 +53,7 @@ public class ClauseAdapter implements Adapter{
                             +", "+srediAtribut(next.getRight())
                             +", as: "+srediAtribut(oprt.getLeft());
                 }
+                str +=" }";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
@@ -60,7 +61,7 @@ public class ClauseAdapter implements Adapter{
             }
 
             if(oprt instanceof Like){//sintaksa zaa like: a like (nesto)
-                str = srediAtribut(oprt.getLeft());
+                str ="{ "+srediAtribut(oprt.getLeft());
                 str+=": /";
                 String temp = srediAtribut(oprt.getRight());
                 temp = temp.substring(2,temp.length()-2);
@@ -78,13 +79,14 @@ public class ClauseAdapter implements Adapter{
                         else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
                     }
                 }else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
+                str+=" }";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
             }
             if(oprt instanceof And){
                 // sastavljanje stringa za and
-                str = " $and: [ {";
+                str = "{ $and: [ {";
                 str += adaptedOprt.get(adaptedOprt.size()-1)+" }";
                 adaptedOprt.remove(adaptedOprt.size()-1);
                 i++;
@@ -96,7 +98,7 @@ public class ClauseAdapter implements Adapter{
                         str +=", {"+this.stringConverter(clause.getOperators().get(i))+ " }";
                     }
                 
-                str += " ] ";
+                str += " ] }";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
