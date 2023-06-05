@@ -134,25 +134,25 @@ public class ClauseAdapter implements Adapter{
         if(oprt instanceof Sum){
             String buf = srediAtribut(oprt.getRight());
             if(buf.contains("*"))buf = "1";
-            str = "{ $sum: " + buf+" }";
+            str = oprt.getRight().getValue()+"Sum: { $sum: " + buf+" }";
             return str;
         }
         if(oprt instanceof Count){
             String buf = srediAtribut(oprt.getRight());
             if(buf.contains("*"))buf = "1";
-            str = "{ $sum: " + buf+" }";
+            str = oprt.getRight().getValue()+"Count: { $sum: " + buf+" }";
             return str;
         }
         if(oprt instanceof Avg){
-            str = "{ $avg: " + srediAtribut(oprt.getRight())+" }";
+            str = oprt.getRight().getValue()+"Avg: { $avg: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Max){
-            str = "{ $max: " + srediAtribut(oprt.getRight())+" }";
+            str = oprt.getRight().getValue()+"Max: { $max: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Min){
-            str = "{ $min: " + srediAtribut(oprt.getRight())+" }";
+            str = oprt.getRight().getValue()+"Min: { $min: " + srediAtribut(oprt.getRight())+" }";
             return str;
         }
         if(oprt instanceof Equals){
