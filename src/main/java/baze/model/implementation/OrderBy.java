@@ -19,8 +19,9 @@ public class OrderBy extends Clause{
             }
 
             //Upisuje sve sto soritra
-            this.getOperators().add(FactoryUtils.getFactory(lines[i]).getOprt(lines[i] + " "+rastuce));
+            this.getOperators().add(FactoryUtils.getFactory(lines[i]).getOprt(lines[i]));
         }
+        this.getOperators().add(FactoryUtils.getFactory(String.valueOf(rastuce)).getOprt(String.valueOf(rastuce)));
 
         System.out.println("OrderBy: " + rastuce + " operatori: " + this.getOperators());
     }

@@ -76,9 +76,9 @@ public class Mapper {
                     break;
                 }
                 //Ako je order by
-                if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) { //TODO
-                    //stringBuilder.append("{ $sort: ").append(adapter.toString()).append("}");
-                    //documents.add(Document.parse(stringBuilder.toString()));
+                if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) {
+                    stringBuilder.append("{ $sort: ").append(adapter.toString()).append("}");
+                    documents.add(stringBuilder.toString());
                     break;
                 }
             }

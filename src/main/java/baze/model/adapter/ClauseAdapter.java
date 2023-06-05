@@ -4,10 +4,14 @@ import baze.model.factory.adapter.AdapterFactoryUtils;
 import baze.model.implementation.Clause;
 import baze.model.implementation.operators.*;
 import baze.model.implementation.operators.agregation.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class ClauseAdapter implements Adapter{
     protected Clause clause;
     protected  ClauseAdapter podupitAdapter;
