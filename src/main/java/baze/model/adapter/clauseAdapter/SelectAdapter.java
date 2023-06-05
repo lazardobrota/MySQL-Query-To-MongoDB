@@ -22,7 +22,7 @@ public class SelectAdapter extends ClauseAdapter {
         String str = "{ ";
         if(!adaptedOprt.contains("\"_id\""))str+="\"_id\": 0, ";
         for(String oprt: adaptedOprt){
-            if(oprt.contains("'{")){
+            if(oprt.contains("{")){
                 str+= oprt+", ";
             }else{
                 str+=oprt+": 1, ";
