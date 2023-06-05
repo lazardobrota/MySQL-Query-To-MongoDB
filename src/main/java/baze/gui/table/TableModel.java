@@ -20,7 +20,7 @@ public class TableModel extends DefaultTableModel {
 
             columnVector = DefaultTableModel.convertToVector(rows.get(0).getFields().keySet().toArray());
         }
-        
+
         Vector dataVector = new Vector(columnCount);
 
         for (int i=0; i<rows.size(); i++){

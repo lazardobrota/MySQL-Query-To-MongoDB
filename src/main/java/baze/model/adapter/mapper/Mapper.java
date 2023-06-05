@@ -44,7 +44,10 @@ public class Mapper {
             for (ClauseAdapter adapter : clauseAdapters) {
                 //Ako je from adapter
                 if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
-                    from = adapter.adapterToString(adapter); // uzima za from deo
+                    from = ((FromAdapter) adapter).getFrom(); // uzima za from deo
+                    for (int i = 0; i < adapter.getAdaptedOprt().size(); i++) {
+                        System.out.println(adapter.getAdaptedOprt().get(i));
+                    }
                     break;
                 }
                 //Ako je select adapter
