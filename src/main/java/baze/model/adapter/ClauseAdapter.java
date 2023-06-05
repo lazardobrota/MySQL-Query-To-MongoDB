@@ -47,16 +47,16 @@ public abstract class ClauseAdapter implements Adapter{
 
             //ovde!!!!!!!!!!!!!!!!!!!!!!!!
             if(oprt instanceof Join){
-                str = "{ $lookup: { ";
+                str = "{ $lookup: { from: "+srediAtribut(oprt.getRight());
                 i++;
                 Oprt next = clause.getOperators().get(i);
                 if(next instanceof On){
-                    str +="localField: "+srediAtribut(next.getRight().getLeft())
-                            +", "+srediAtribut(next.getRight().getLeft())
+                    str +=", localField: "+srediAtribut(next.getRight().getLeft())
+                            +", foreignField: "+srediAtribut(next.getRight().getLeft())
                             +", as: "+srediAtribut(oprt.getLeft());
                 }else {//Using
-                    str +="localField: "+srediAtribut(next.getRight())
-                            +", "+srediAtribut(next.getRight())
+                    str +=", localField: "+srediAtribut(next.getRight())
+                            +", foreignField: "+srediAtribut(next.getRight())
                             +", as: "+srediAtribut(oprt.getLeft());
                 }
                 str +=" }";
