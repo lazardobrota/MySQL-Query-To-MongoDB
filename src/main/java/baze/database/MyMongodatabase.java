@@ -57,7 +57,6 @@ public class MyMongodatabase implements Database{
             //Uspostavlja konekicju
             MongoDatabase database = connection.getDatabase((String) settings.getParameter("mysql_database")); // bp_tim47
 
-            //TODO Uvek mora da ima &project
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(mapper.getDocuments()).iterator();
             /*
             MongoCursor<org.bson.Document> cursor = database.getCollection(mapper.getFrom()).aggregate(

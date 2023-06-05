@@ -17,9 +17,9 @@ public class OrderBy extends Clause{
                 rastuce = -1;
                 continue;
             }
-
+            String[] str = lines[i].split(","); // bez zareza da uzme string
             //Upisuje sve sto soritra
-            this.getOperators().add(FactoryUtils.getFactory(lines[i]).getOprt(lines[i]));
+            this.getOperators().add(FactoryUtils.getFactory(str[0]).getOprt(str[0]));
         }
         this.getOperators().add(FactoryUtils.getFactory(String.valueOf(rastuce)).getOprt(String.valueOf(rastuce)));
 

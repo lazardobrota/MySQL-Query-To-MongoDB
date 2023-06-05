@@ -71,8 +71,8 @@ public class Mapper {
                 }
                 //Ako je group by
                 if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //TODO
-                    //stringBuilder.append("{ $group: ").append(adapter.toString()).append("}");
-                    //documents.add(Document.parse(stringBuilder.toString()));
+                    stringBuilder.append("{ $group: ").append(adapter.toString()).append("}");
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je order by
