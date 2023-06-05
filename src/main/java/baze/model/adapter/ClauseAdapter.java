@@ -60,30 +60,7 @@ public class ClauseAdapter implements Adapter{
 
             }
 
-            if(oprt instanceof Like){//sintaksa zaa like: a like (nesto)
-                str ="{ "+srediAtribut(oprt.getLeft());
-                str+=": /";
-                String temp = srediAtribut(oprt.getRight());
-                temp = temp.substring(2,temp.length()-2);
-                if(temp.contains("%")){//pita da li se % nalazi u stringu
-                    if(temp.charAt(0) == '%'){//pita da li se % nalazi na pocetku
-                        if(temp.charAt(temp.length()-1) == '%'){//pita da li se % nalazi na kraju
-                            str+=temp.substring(1, temp.length()-1)+"/i";
-                        }else{// u slucaju da pocinje sa % ali se ne zavrsava sa %
-                            str+=temp.substring(1)+"$/i";
-                        }
-                    }else{//slucaj da ne pocinje sa %
-                        if(temp.charAt(temp.length()-1) == '%'){//pita da li sadrzi % na kraju
-                            str+="^"+temp.substring(0,temp.length()-1)+"/i";;
-                        }
-                        else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
-                    }
-                }else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
-                str+=" }";
-                adaptedOprt.add(str);
-                str = "";
-                continue;
-            }
+
             if(oprt instanceof And){
                 // sastavljanje stringa za and
                 str = "{ $and: [ {";
@@ -128,6 +105,28 @@ public class ClauseAdapter implements Adapter{
     public String stringConverter(Oprt oprt){
         //pomocna funkcija za pripremu String-ova za podupite
         String str;
+        if(oprt instanceof Like){//sintaksa zaa like: a like (nesto)
+            str ="{ "+srediAtribut(oprt.getLeft());
+            str+=": /";
+            String temp = srediAtribut(oprt.getRight());
+            temp = temp.substring(2,temp.length()-2);
+            if(temp.contains("%")){//pita da li se % nalazi u stringu
+                if(temp.charAt(0) == '%'){//pita da li se % nalazi na pocetku
+                    if(temp.charAt(temp.length()-1) == '%'){//pita da li se % nalazi na kraju
+                        str+=temp.substring(1, temp.length()-1)+"/i";
+                    }else{// u slucaju da pocinje sa % ali se ne zavrsava sa %
+                        str+=temp.substring(1)+"$/i";
+                    }
+                }else{//slucaj da ne pocinje sa %
+                    if(temp.charAt(temp.length()-1) == '%'){//pita da li sadrzi % na kraju
+                        str+="^"+temp.substring(0,temp.length()-1)+"/i";;
+                    }
+                    else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
+                }
+            }else str=srediAtribut(oprt.getLeft())+": /"+temp+"/i";
+            str+=" }";
+            return str;
+        }
         if(oprt instanceof Sum){
             String buf = srediAtribut(oprt.getRight());
             if(buf.contains("*"))buf = "1";
