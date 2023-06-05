@@ -2,6 +2,7 @@ package baze.model.adapter.clauseAdapter;
 
 import baze.model.adapter.ClauseAdapter;
 import baze.model.implementation.Clause;
+import baze.model.implementation.operators.agregation.Agregation;
 import lombok.Setter;
 
 
@@ -21,7 +22,11 @@ public class SelectAdapter extends ClauseAdapter {
         String str = "{ ";
         if(!adaptedOprt.contains("\"_id\""))str+="\"_id\": 0, ";
         for(String oprt: adaptedOprt){
-            str+=oprt+": 1, ";
+            if(oprt.contains("'{")){
+                str+= oprt+", ";
+            }else{
+                str+=oprt+": 1, ";
+            }
         }
         str = str.substring(0, str.length() - 2); // uklanja zarez
         str +=" }";
