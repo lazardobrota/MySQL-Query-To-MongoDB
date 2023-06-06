@@ -84,6 +84,7 @@ public class Mapper {
                 }
                 //Ako je order by
                 if (checker instanceof OrderByAdapter && adapter instanceof OrderByAdapter) {
+                    adapter.fillOutList();
                     stringBuilder.append("{ $sort: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
