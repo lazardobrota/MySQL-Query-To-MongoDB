@@ -1,4 +1,4 @@
-package baze.model.validator.utils;
+package baze.utils;
 
 public class Constants {
     public static final String MYSQL_IP = "134.209.239.154";
