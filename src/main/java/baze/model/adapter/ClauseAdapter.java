@@ -196,13 +196,13 @@ public abstract class ClauseAdapter implements Adapter{
             return str;
         }
         if(oprt instanceof In){
-            str = srediAtribut(oprt.getLeft()) + ": { $in: [ "; // pocetni deo adaptiranog mongu koda
+            str = "{ "+ srediAtribut(oprt.getLeft()) + ": { $in: [ "; // pocetni deo adaptiranog mongu koda
             if(!((In) oprt).getColumnStrings().isEmpty()){//U slucaju da ne sadrzi podupit popunjava atribute i zatvara zagrade
                 for(int i = 0; i < ((In) oprt).getColumnStrings().size(); i++){
                     str += srediAtribut(((In) oprt).getColumnStrings().get(i));
                     if(i<((In) oprt).getColumnStrings().size()-1)str+=", ";
                 }
-                return str + " ] }";
+                return str + " ] }}";
             }
             if(((In) oprt).getPodupit() != null){ // ako sadrzi podupit onda ostavlja otvorenu zagradu bez atributa i priprema podupit
                 podupitAdapter = (ClauseAdapter) AdapterFactoryUtils.getFactory(((In) oprt).getPodupit()).createAdapter(((In) oprt).getPodupit());
