@@ -2,6 +2,7 @@ package baze.model.adapter.clauseAdapter;
 
 import baze.model.adapter.ClauseAdapter;
 import baze.model.implementation.Clause;
+import baze.model.implementation.operators.Oprt;
 
 public class GroupByAdapter extends ClauseAdapter {
     public GroupByAdapter(){
@@ -18,6 +19,11 @@ public class GroupByAdapter extends ClauseAdapter {
         for (int i = 0; i < clause.getOperators().size(); i++) {
             adaptedOprt.add(clause.getOperators().get(i).getValue() + ": " + "\"$" + clause.getOperators().get(i).getValue() + "\"");
         }
+    }
+
+    @Override
+    public String stringConverter(Oprt oprt) {
+        return null;
     }
 
     //Ovo se poziva umesto toString

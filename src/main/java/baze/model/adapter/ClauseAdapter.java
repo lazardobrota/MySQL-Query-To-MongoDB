@@ -38,7 +38,44 @@ public abstract class ClauseAdapter implements Adapter{
     }
 
     public abstract String adapterToString(ClauseAdapter clauseAdapter);
+    public abstract void fillOutList();
+    public abstract String stringConverter(Oprt oprt);
 
+    public String srediAtribut(Oprt oprt){//Proverava prosledjen atribut i pretvata u String
+        String str = "";
+        str = oprt.getValue();
+        if(! (oprt instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
+            str = stringConverter(oprt);
+        }else{// u suprotnom je samo atribut i pretvara se u string
+            try {
+                Integer.parseInt(oprt.getValue());
+            }catch (NumberFormatException nfe){
+                str  = "\""+str+"\"";
+            }
+        }
+
+
+        return str;
+    }
+
+    public String combineColumnNames(Oprt left, Oprt right){//Proverava prosledjen atribute i pretvara u String
+        String str = "";
+        str = left.getValue() + right.getValue();
+        if(!(left instanceof ColumnString) || !(right instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
+            return ""; // vraca prazan string ako nisu oba columnStringovi
+        }else{// u suprotnom je samo atribut i pretvara se u string
+            try {
+                Integer.parseInt(left.getValue() + right.getValue());
+            }catch (NumberFormatException nfe){
+                str  = "\""+str;
+            }
+        }
+
+
+        return str;
+    }
+
+    /*
     public void fillOutList(){
 
         Oprt oprt;
@@ -227,38 +264,6 @@ public abstract class ClauseAdapter implements Adapter{
         return str;
 
     }
-    public String srediAtribut(Oprt oprt){//Proverava prosledjen atribut i pretvata u String
-        String str = "";
-        str = oprt.getValue();
-            if(! (oprt instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
-                str = stringConverter(oprt);
-            }else{// u suprotnom je samo atribut i pretvara se u string
-                try {
-                    Integer.parseInt(oprt.getValue());
-                }catch (NumberFormatException nfe){
-                    str  = "\""+str+"\"";
-                }
-            }
-
-
-        return str;
-    }
-
-    public String combineColumnNames(Oprt left, Oprt right){//Proverava prosledjen atribute i pretvara u String
-        String str = "";
-        str = left.getValue() + right.getValue();
-        if(!(left instanceof ColumnString) || !(right instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
-            return ""; // vraca prazan string ako nisu oba columnStringovi
-        }else{// u suprotnom je samo atribut i pretvara se u string
-            try {
-                Integer.parseInt(left.getValue() + right.getValue());
-            }catch (NumberFormatException nfe){
-                str  = "\""+str+"\"";
-            }
-        }
-
-
-        return str;
-    }
+     */
 
 }

@@ -2,6 +2,7 @@ package baze.model.adapter.clauseAdapter;
 
 import baze.model.adapter.ClauseAdapter;
 import baze.model.implementation.Clause;
+import baze.model.implementation.operators.Oprt;
 
 public class OrderByAdapter extends ClauseAdapter {
 
@@ -21,6 +22,11 @@ public class OrderByAdapter extends ClauseAdapter {
             //Uzima trenutnu kolonu i poslednju stvar u nizu operatora jer ona govori da li je rastuce ili opadajuice
             adaptedOprt.add(clause.getOperators().get(i).getValue() + ": " + clause.getOperators().get(clause.getOperators().size() - 1).getValue());
         }
+    }
+
+    @Override
+    public String stringConverter(Oprt oprt) {
+        return null;
     }
 
     @Override

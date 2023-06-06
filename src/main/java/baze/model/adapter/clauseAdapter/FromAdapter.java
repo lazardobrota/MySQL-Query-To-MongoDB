@@ -33,7 +33,7 @@ public class FromAdapter extends ClauseAdapter {
 
             if(oprt instanceof Join){
                 this.setFrom(oprt.getLeft().getValue());
-                join = combineColumnNames(oprt.getLeft(), oprt.getRight());
+                join = combineColumnNames(oprt.getLeft(), oprt.getRight()) + ".";
                 str = "{ $lookup: { from: "+srediAtribut(oprt.getRight());
                 i++;
                 Oprt next = clause.getOperators().get(i);
@@ -130,5 +130,22 @@ public class FromAdapter extends ClauseAdapter {
     @Override
     public String adapterToString(ClauseAdapter clauseAdapter) {
         return this.adaptedOprt.get(0).substring(1,adaptedOprt.get(0).length()-1);
+    }
+
+    @Override
+    public String combineColumnNames(Oprt left, Oprt right){//Proverava prosledjen atribute i pretvara u String
+        String str = "";
+        str = left.getValue() + right.getValue();
+        if(!(left instanceof ColumnString) || !(right instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
+            return ""; // vraca prazan string ako nisu oba columnStringovi
+        }else{// u suprotnom je samo atribut i pretvara se u string
+            try {
+                Integer.parseInt(left.getValue() + right.getValue());
+            }catch (NumberFormatException ignored){
+            }
+        }
+
+
+        return str;
     }
 }

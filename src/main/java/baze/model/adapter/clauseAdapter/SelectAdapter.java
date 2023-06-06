@@ -62,7 +62,7 @@ public class SelectAdapter extends ClauseAdapter {
 
         if(oprt == null) return "";
 
-        str = "\""+ join+"."+oprt.getValue()+"\"";
+        str = "\""+ join +oprt.getValue()+"\"";
         return str;
     }
 
