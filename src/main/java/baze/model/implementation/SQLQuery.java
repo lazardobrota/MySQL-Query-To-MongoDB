@@ -70,7 +70,6 @@ public class SQLQuery implements AClause{
                     }
                     SQLQuery podupit = new SQLQuery();
                     podupit.strToObj(stringBuilder.toString());
-                    // TODO Treba da se stavi podupit u neki operator
                     Clause where = (Clause) claues.get(claues.size() - 1); // uzima where clause
                     for (int j = 0; j < where.getOperators().size(); j++) {
                         if (where.getOperators().get(j) instanceof In) {

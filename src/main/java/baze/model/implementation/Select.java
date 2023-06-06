@@ -29,7 +29,7 @@ public class Select extends Clause{
 
             //Dodaje ih sve listu koji nemaju min, max, avg, count
             for (int j = 0; j < arr.length; j++) {
-                if (arr[j].contains("max") || arr[j].contains("min") || arr[j].contains("avg") || arr[j].contains("count")) {
+                if (arr[j].contains("max") || arr[j].contains("min") || arr[j].contains("avg") || arr[j].contains("count") || arr[j].contains("sum")) {
                     getOperators().add(Objects.requireNonNull(FactoryUtils.getFactory(arr[j])).getOprt(arr[j])); // pravi novi max ili avg ili min operator
 
                     // uzima lines , i + j koji govori dokle je u lines stao, na primer lines[2] je max i u arr kada se splituje to ce biti na 0 mestu, pa 2 + 0 = 2

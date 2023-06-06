@@ -72,14 +72,14 @@ public class Mapper {
                     break;
                 }
                 //Ako je where
-                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //todo treba podupit da se uradi i druge verzije like da se skloni {}, 'S%', ...
+                if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) {
                     adapter.fillOutList();
                     stringBuilder.append("{ $match: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
-                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //todo prebaci sort u group by ako group by postoji
+                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) {
                     adapter.fillOutList();
                     documents.remove(documents.size() - 1); // uklanja select jer je select provera
                     stringBuilder.append("{ $group: ").append(adapter.adapterToString(selectAdapter)).append("}");

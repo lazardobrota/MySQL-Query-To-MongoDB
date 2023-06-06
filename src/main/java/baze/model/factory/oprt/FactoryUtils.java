@@ -48,8 +48,10 @@ public class FactoryUtils {
             return avgFactory;
         if (operation.matches("max") || operation.contains("max("))
             return maxFactory;
-        if (operation.matches("min") || operation.contains("min"))
+        if (operation.matches("min") || operation.contains("min("))
             return minFactory;
+        if (operation.matches("sum") || operation.contains("sum("))
+            return sumFactory;
         if (operation.equals("join"))
             return joinFactory;
         if (operation.equals("in"))
