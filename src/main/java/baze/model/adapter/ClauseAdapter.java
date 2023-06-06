@@ -17,7 +17,7 @@ public abstract class ClauseAdapter implements Adapter{
     protected Clause clause;
     protected  ClauseAdapter podupitAdapter;
     protected List<String> adaptedOprt;
-    protected String join; // ovde cuva as: deo ako postoji join
+    protected static String join; // ovde cuva as: deo ako postoji join
 
     public ClauseAdapter() {
         adaptedOprt = new ArrayList<>();
@@ -28,8 +28,6 @@ public abstract class ClauseAdapter implements Adapter{
         this.clause = clause;
         this.adaptedOprt = new ArrayList<>();
         join = ""; // na pocetku je prazno i dodaje se svima, ako postoji join on uzima naziv i dodaje ga svima, primer elementdepartment.first_name
-        fillOutList();
-
     }
 
     @Override
@@ -55,7 +53,7 @@ public abstract class ClauseAdapter implements Adapter{
                     return;
 
                 ((FromAdapter) this).setFrom(oprt.getLeft().getValue());
-                ((FromAdapter) this).setJoin(combineColumnNames(oprt.getLeft(), oprt.getRight()));
+                join = combineColumnNames(oprt.getLeft(), oprt.getRight());
                 str = "{ $lookup: { from: "+srediAtribut(oprt.getRight());
                 i++;
                 Oprt next = clause.getOperators().get(i);

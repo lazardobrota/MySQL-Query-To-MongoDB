@@ -33,7 +33,7 @@ public class FromAdapter extends ClauseAdapter {
 
             if(oprt instanceof Join){
                 this.setFrom(oprt.getLeft().getValue());
-                this.setJoin(combineColumnNames(oprt.getLeft(), oprt.getRight()));
+                join = combineColumnNames(oprt.getLeft(), oprt.getRight());
                 str = "{ $lookup: { from: "+srediAtribut(oprt.getRight());
                 i++;
                 Oprt next = clause.getOperators().get(i);

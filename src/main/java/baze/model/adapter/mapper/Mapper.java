@@ -44,6 +44,7 @@ public class Mapper {
             for (ClauseAdapter adapter : clauseAdapters) {
                 //Ako je from adapter
                 if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
+                    adapter.fillOutList();
                     from = ((FromAdapter) adapter).getFrom(); // uzima za from deo
                     //stringBuilder.append("{").append(adapter.adapterToString(adapter)).append("}");
                     //documents.add(org.bson.Document.parse(stringBuilder.toString()));
@@ -51,6 +52,7 @@ public class Mapper {
                 }
                 //Ako je select adapter
                 if (checker instanceof SelectAdapter && adapter instanceof SelectAdapter) {
+                    adapter.fillOutList();
                     if (adapter.toString().length() == 0)
                         break;
                     selectAdapter = (SelectAdapter) adapter;
@@ -60,18 +62,21 @@ public class Mapper {
                 }
                 //Ako je having
                 if (checker instanceof HavingAdapter && adapter instanceof HavingAdapter) {
+                    adapter.fillOutList();
                     stringBuilder.append("{ $match: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je where
                 if (checker instanceof WhereAdapter && adapter instanceof WhereAdapter) { //todo treba podupit da se uradi i druge verzije like da se skloni {}, 'S%', ...
+                    adapter.fillOutList();
                     stringBuilder.append("{ $match: ").append(adapter.adapterToString(adapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je group by
                 if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //todo prebaci sort u group by ako group by postoji
+                    adapter.fillOutList();
                     documents.remove(documents.size() - 1); // uklanja select jer je select provera
                     stringBuilder.append("{ $group: ").append(adapter.adapterToString(selectAdapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));
