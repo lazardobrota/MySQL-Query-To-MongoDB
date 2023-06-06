@@ -60,7 +60,7 @@ public abstract class ClauseAdapter implements Adapter{
                             +", foreignField: "+srediAtribut(next.getRight())
                             +", as: "+srediAtribut(oprt.getLeft());
                 }
-                str +=" }";
+                str +=" } ";
                 adaptedOprt.add(str);
                 str = "";
                 continue;
