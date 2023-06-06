@@ -21,6 +21,7 @@ public class SelectAdapter extends ClauseAdapter {
 
     @Override
     public void fillOutList() {
+        adaptedOprt.clear();
         Oprt oprt;
         String str;
         // prolazi kroz listu operatora i u zavisnosti od njegove instance odgovarajuce ga konvertuje u String
@@ -41,7 +42,7 @@ public class SelectAdapter extends ClauseAdapter {
             return str;
         }
         if(oprt instanceof Count){
-            String buf = "\"$" + oprt.getRight().getValue() +"\"";
+            String buf = "\"$" +oprt.getRight().getValue() +"\"";
             if(buf.contains("*"))buf = "1";
             str = oprt.getRight().getValue()+"Count: { $sum: " + buf+" }";
             return str;
@@ -61,7 +62,7 @@ public class SelectAdapter extends ClauseAdapter {
 
         if(oprt == null) return "";
 
-        str = "\""+oprt.getValue()+"\"";
+        str = "\""+ join+"."+oprt.getValue()+"\"";
         return str;
     }
 
