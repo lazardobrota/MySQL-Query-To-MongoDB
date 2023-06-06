@@ -71,7 +71,7 @@ public class Mapper {
                     break;
                 }
                 //Ako je group by
-                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) {
+                if (checker instanceof GroupByAdapter && adapter instanceof GroupByAdapter) { //todo prebaci sort u group by ako group by postoji
                     documents.remove(documents.size() - 1); // uklanja select jer je select provera
                     stringBuilder.append("{ $group: ").append(adapter.adapterToString(selectAdapter)).append("}");
                     documents.add(org.bson.Document.parse(stringBuilder.toString()));

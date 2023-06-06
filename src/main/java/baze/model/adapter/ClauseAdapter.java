@@ -17,14 +17,17 @@ public abstract class ClauseAdapter implements Adapter{
     protected Clause clause;
     protected  ClauseAdapter podupitAdapter;
     protected List<String> adaptedOprt;
+    protected String join; // ovde cuva as: deo ako postoji join
 
     public ClauseAdapter() {
         adaptedOprt = new ArrayList<>();
+        join = ""; // na pocetku je prazno i dodaje se svima, ako postoji join on uzima naziv i dodaje ga svima, primer elementdepartment.first_name
     }
 
     public ClauseAdapter(Clause clause) {
         this.clause = clause;
         this.adaptedOprt = new ArrayList<>();
+        join = ""; // na pocetku je prazno i dodaje se svima, ako postoji join on uzima naziv i dodaje ga svima, primer elementdepartment.first_name
         fillOutList();
 
     }
@@ -48,17 +51,22 @@ public abstract class ClauseAdapter implements Adapter{
 
             //ovde!!!!!!!!!!!!!!!!!!!!!!!!
             if(oprt instanceof Join){
+                if (!(this instanceof FromAdapter))
+                    return;
+
+                ((FromAdapter) this).setFrom(oprt.getLeft().getValue());
+                ((FromAdapter) this).setJoin(combineColumnNames(oprt.getLeft(), oprt.getRight()));
                 str = "{ $lookup: { from: "+srediAtribut(oprt.getRight());
                 i++;
                 Oprt next = clause.getOperators().get(i);
                 if(next instanceof On){
                     str +=", localField: "+srediAtribut(next.getRight().getLeft())
                             +", foreignField: "+srediAtribut(next.getRight().getLeft())
-                            +", as: "+srediAtribut(oprt.getLeft());
+                            +", as: " + combineColumnNames(oprt.getLeft(), oprt.getRight());
                 }else {//Using
                     str +=", localField: "+srediAtribut(next.getRight())
                             +", foreignField: "+srediAtribut(next.getRight())
-                            +", as: "+srediAtribut(oprt.getLeft());
+                            +", as: " + combineColumnNames(oprt.getLeft(), oprt.getRight());
                 }
                 str +=" } ";
                 adaptedOprt.add(str);
@@ -233,6 +241,23 @@ public abstract class ClauseAdapter implements Adapter{
                     str  = "\""+str+"\"";
                 }
             }
+
+
+        return str;
+    }
+
+    public String combineColumnNames(Oprt left, Oprt right){//Proverava prosledjen atribute i pretvara u String
+        String str = "";
+        str = left.getValue() + right.getValue();
+        if(!(left instanceof ColumnString) || !(right instanceof ColumnString)){ // u slucaju da je atribut novi Oprt onda zove stringConverter za njega
+            return ""; // vraca prazan string ako nisu oba columnStringovi
+        }else{// u suprotnom je samo atribut i pretvara se u string
+            try {
+                Integer.parseInt(left.getValue() + right.getValue());
+            }catch (NumberFormatException nfe){
+                str  = "\""+str+"\"";
+            }
+        }
 
 
         return str;

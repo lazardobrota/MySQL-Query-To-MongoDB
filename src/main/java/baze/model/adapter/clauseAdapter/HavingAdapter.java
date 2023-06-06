@@ -18,7 +18,7 @@ public class HavingAdapter extends ClauseAdapter {
                 adaptedOprt +
                 '}';
     }
-
+    //TODO Isto ko where kopiraj, samo za agregacije
     @Override
     public String adapterToString(ClauseAdapter clauseAdapter) {
         return null;
