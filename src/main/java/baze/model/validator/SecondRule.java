@@ -29,7 +29,7 @@ public class SecondRule extends Rule{
                     //Ako ima nesto sto nije string znaci da ima agregaciju
                     if (!(select.getOperators().get(j) instanceof ColumnString)) {
                         agregation = true;
-                        break;
+                        continue;
                     }
                     //Ako je columnString
                     columns.add(select.getOperators().get(j));
