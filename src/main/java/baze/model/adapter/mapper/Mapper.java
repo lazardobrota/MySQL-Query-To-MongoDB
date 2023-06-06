@@ -46,8 +46,12 @@ public class Mapper {
                 if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
                     adapter.fillOutList();
                     from = ((FromAdapter) adapter).getFrom(); // uzima za from deo
-                    //stringBuilder.append("{").append(adapter.adapterToString(adapter)).append("}");
-                    //documents.add(org.bson.Document.parse(stringBuilder.toString()));
+                    stringBuilder.append("{").append(adapter.adapterToString(adapter)).append("}");
+
+                    //Ne postoji join ako nema as:
+                    if (!stringBuilder.toString().contains("as:"))
+                        break;
+                    documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je select adapter

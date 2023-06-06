@@ -44,7 +44,7 @@ public class FromAdapter extends ClauseAdapter {
                 }else {//Using
                     str +=", localField: "+srediAtribut(next.getRight())
                             +", foreignField: "+srediAtribut(next.getRight())
-                            +", as: " + combineColumnNames(oprt.getLeft(), oprt.getRight());
+                            +", as: \"" + combineColumnNames(oprt.getLeft(), oprt.getRight()) + "\"";
                 }
                 str +=" } ";
                 adaptedOprt.add(str);
