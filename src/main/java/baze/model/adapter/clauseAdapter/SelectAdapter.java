@@ -43,8 +43,10 @@ public class SelectAdapter extends ClauseAdapter {
         }
         if(oprt instanceof Count){
             String buf = "\"$" +oprt.getRight().getValue() +"\"";
-            if(buf.contains("*"))buf = "1";
-            str = oprt.getRight().getValue()+"Count: { $sum: " + 1+" }";
+            if (!buf.contains("*"))
+                str = oprt.getRight().getValue()+"Count: { $sum: " + 1 + " }"; // ako ima count(nesto)
+            else
+                str = "allCount: { $sum: " + 1 + " }"; // ako ima count(*)
             return str;
         }
         if(oprt instanceof Avg){
