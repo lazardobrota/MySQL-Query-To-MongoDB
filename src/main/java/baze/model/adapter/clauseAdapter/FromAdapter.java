@@ -11,8 +11,10 @@ import lombok.Setter;
 public class FromAdapter extends ClauseAdapter {
 
     private String from;
+    private String join;
     public  FromAdapter(){
         super();
+        join = ""; // na pocetku je prazno i dodaje se svima, ako postoji join on uzima naziv i dodaje ga svima, primer elementdepartment.first_name
     }
 
     public FromAdapter(Clause clause) {

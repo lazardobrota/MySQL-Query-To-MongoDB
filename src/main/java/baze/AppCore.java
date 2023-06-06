@@ -6,7 +6,7 @@ import baze.database.settings.Settings;
 import baze.database.settings.SettingsImplementation;
 import baze.gui.table.TableModel;
 import baze.model.adapter.mapper.Mapper;
-import baze.model.validator.utils.Constants;
+import baze.utils.Constants;
 import lombok.Getter;
 import lombok.Setter;
 

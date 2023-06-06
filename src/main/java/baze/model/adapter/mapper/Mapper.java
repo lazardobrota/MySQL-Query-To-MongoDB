@@ -45,9 +45,8 @@ public class Mapper {
                 //Ako je from adapter
                 if (checker instanceof FromAdapter && adapter instanceof FromAdapter) { //todo treba join da se uradi
                     from = ((FromAdapter) adapter).getFrom(); // uzima za from deo
-                    for (int i = 0; i < adapter.getAdaptedOprt().size(); i++) {
-                        System.out.println(adapter.getAdaptedOprt().get(i));
-                    }
+                    //stringBuilder.append("{").append(adapter.adapterToString(adapter)).append("}");
+                    //documents.add(org.bson.Document.parse(stringBuilder.toString()));
                     break;
                 }
                 //Ako je select adapter
