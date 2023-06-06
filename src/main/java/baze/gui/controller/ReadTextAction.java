@@ -19,16 +19,12 @@ public class ReadTextAction extends AbstractAction {
         SQLQuery sqlQuery = new SQLQuery();
         sqlQuery.strToObj(MainFrame.getInstance().getTextArea().getText()); // prosledjuje mu tekst koji je napisan u tekst area
 
-        //Ako nista nije napisao
-        /*TODO Odkomentarisi kasnije ovo, samo radi testiranja stvari je zakomentarisano
-        if (sqlQuery.getClaues().isEmpty())
-            return;
-
-         */
         Validator validator = new Validator(sqlQuery);
         if (!validator.checkRules()) {
             MainFrame.getInstance().errorMessage(validator.getMessage());
+            return;
         }
+
         List<ClauseAdapter> clauseAdapters = new ArrayList<>();
         for (int i = 0 ;i < sqlQuery.getClaues().size(); i++) {
             Clause clause = (Clause) sqlQuery.getClaues().get(i);
